@@ -24,7 +24,7 @@
                         {!! Form::open(['route' => 'admin.clientes.store', 'autocomplete'=> 'off']) !!}
 
                             {{-- Cabecera --}}
-                            <h5 class="text-info">
+                            <h5 class="text-secondary">
                                 CREAR UN NUEVO CLIENTE
                             </h5>
                             
