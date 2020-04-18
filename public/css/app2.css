@@ -1,0 +1,53 @@
+/* Formato de label */
+label{
+    font-weight: normal!important;
+    font-size: 16px!important;
+    color: #6C757D;
+}
+
+
+/* Formato de input number */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+-webkit-appearance: none; 
+margin: 0; 
+}
+input[type=number] { -moz-appearance:textfield; }
+
+
+/* Bordes de color */
+.borde-left{
+    border-left-width: 5px !important;
+}
+
+.borde-primary{
+    border-left-color : #007BFF !important;
+}
+
+.borde-secondary{
+    border-left-color : #6C757D !important;
+}
+
+.borde-success{
+    border-left-color : #28A745 !important;
+}
+
+.borde-danger{
+    border-left-color : #DC3545 !important;
+}
+
+.borde-warning{
+    border-left-color : #FFC107 !important;
+}
+
+.borde-info{
+    border-left-color : #17A2B8 !important;
+}
+
+.borde-light{
+    border-left-color : #F8F9FA !important;
+}
+
+.borde-dark{
+    border-left-color : #343A40 !important;
+}
