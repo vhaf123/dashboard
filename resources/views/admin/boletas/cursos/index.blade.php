@@ -39,18 +39,22 @@
                 @foreach ($boleta->contratados as $contratado)
                     <tr>
 
-                        <td>
-                            <form method="POST" action="{{route('borrar.cursos', $contratado)}}" class="formularioborrar">
+                        @if ($boleta->estado == 'GENERADO')
+                            <td>
+                                <form method="POST" action="{{route('borrar.cursos', $contratado)}}" class="formularioborrar">
 
-                                @method('DELETE')
-                                @csrf
+                                    @method('DELETE')
+                                    @csrf
+                            
+                                    <button class="{{-- btn btn-danger btn-sm --}} eliminar">
+                                        <i class="fas fa-times text-danger"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        @else
+                            <td></td>
+                        @endif
                         
-                                <button class="{{-- btn btn-danger btn-sm --}} eliminar">
-                                    <i class="fas fa-times text-danger"></i>
-                                </button>
-                            </form>
-                        </td>
-
                         <td>{{$clases[$n++]}}</td>
                         <td>{{$contratado->curso->name}}</td>
                         <td>{{$contratado->nivel->name}}</td>

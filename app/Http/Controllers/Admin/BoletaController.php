@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade as PDF;
 
 use App\Boleta;
 use App\Timeline;
@@ -111,5 +112,16 @@ class BoletaController extends Controller
         $curso->delete();
         return view('admin.boletas.cursos.index', ['boleta' => Boleta::find($curso->boleta_id)]);
         
+    }
+
+    public function generar(Boleta $boleta){
+
+        $boleta->estado = "IMPRESO";
+        $boleta->save();
+      
+        $pdf = resolve('dompdf.wrapper');
+        $pdf = PDF::loadView('admin.boletas.partials.pdf', compact('boleta'))->setPaper('a4', 'landscape');
+        return $pdf->stream();
+
     }
 }

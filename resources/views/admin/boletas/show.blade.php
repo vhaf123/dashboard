@@ -184,22 +184,26 @@
                         <div class="d-sm-flex justify-content-end">
 
                             {{-- Agregar nuevo curso --}}
-                            <button type="button" class="btn btn-default btn-curso" data-toggle="modal" data-target="#exampleModal">
-                                <i class="fas fa-folder-plus mr-1"></i>
-                                Agregar
+                            
+                            <button type="button" class="btn btn-info btn-curso" data-toggle="modal" 
+                                data-target="#exampleModal"  @if ($boleta->estado == "IMPRESO") disabled="" @endif>
+
+                                <i class="fas fa-chalkboard mr-1"></i>
+                                Agregar curso
+
                             </button>
                             
                             {{-- Descargar pdf --}}
-                            <button class="btn btn-default ml-2">
-                                <i class="fas fa-file-pdf mr-1"></i>
-                                Descargar
-                            </button>
+                            <a href="{{route('generar.pdf', $boleta)}}" class="btn btn-success ml-2" target="_blank" id="generarPdf">
+                                <i class="fas fa-download mr-1"></i>
+                                Descargar PDF
+                            </a>
 
                             {{-- Imprimir --}}
-                            <button class="btn btn-default ml-2">
+                            {{-- <button class="btn btn-default ml-2">
                                 <i class="fas fa-print mr-1"></i>
                                 Imprimir
-                            </button>
+                            </button> --}}
                         </div>
 
                     </div>
@@ -319,49 +323,56 @@
 
 
         /* Enviar por ajax */
-        $('#formularioaenviar').submit(function (ev) {
-            $.ajax({
-                type: $('#formularioaenviar').attr('method'), 
-                url: $('#formularioaenviar').attr('action'),
-                data: $('#formularioaenviar').serialize(),
-                beforeSend: function(){
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'El curso se creó correctamente'
-                    });
-                },
-                success: function (datos){
-                    $('#boleta_cursos').html(datos);
-                } 
+            $('#formularioaenviar').submit(function (ev) {
+                $.ajax({
+                    type: $('#formularioaenviar').attr('method'), 
+                    url: $('#formularioaenviar').attr('action'),
+                    data: $('#formularioaenviar').serialize(),
+                    beforeSend: function(){
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'El curso se creó correctamente'
+                        });
+                    },
+                    success: function (datos){
+                        $('#boleta_cursos').html(datos);
+                    } 
+                });
+                ev.preventDefault();
             });
-            ev.preventDefault();
-        });
 
         /*Borrar por Ajax*/
 
-        $('#boleta_cursos').on("click", ".eliminar",function(){
-            
-            form = $(this).parent('.formularioborrar');
+            $('#boleta_cursos').on("click", ".eliminar",function(){
+                
+                form = $(this).parent('.formularioborrar');
 
-            $.ajax({
-                type: form.attr('method'), 
-                url: form.attr('action'),
-                data: form.serialize(),
-                beforeSend: function(){
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'El curso se eliminó correctamente'
-                    });
-                },
-                success: function (datos){
-                    $('#boleta_cursos').html(datos);
-                }  
+                $.ajax({
+                    type: form.attr('method'), 
+                    url: form.attr('action'),
+                    data: form.serialize(),
+                    beforeSend: function(){
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'El curso se eliminó correctamente'
+                        });
+                    },
+                    success: function (datos){
+                        $('#boleta_cursos').html(datos);
+                    }  
+                });
+
+                return false;
             });
 
-            return false;
-        });
+        /* generar pdf */
 
-
+            $('#generarPdf').click(function(){
+                setTimeout(function(){
+                    location.reload();
+                },1000);
+                
+            })
 
 
         /* Si no se ha imprimido o generado el pdf, abrira el cuadro modal */
