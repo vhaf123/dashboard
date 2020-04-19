@@ -95,6 +95,7 @@
                 
                 <div class="card card-outline card-info">
 
+                    {{-- Cinta, si está anulado --}}
                     @if ($boleta->estado == "ANULADO")
                         <div class="ribbon-wrapper ribbon-xl">
                             <div class="ribbon bg-danger text-lg">

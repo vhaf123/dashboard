@@ -49,13 +49,12 @@ class ClienteController extends Controller
         ]);
 
         $cliente = Cliente::create($request->all());
-
+        
         Timeline::create([
             'cliente_id' => $cliente->id,
+            'admin_id' => \Auth::guard('admin')->user()->id,
             'accion' => 'create_cliente',
-            'accion_id' => $cliente->id
         ]);
-        
 
         return redirect()->route('admin.clientes.show', $cliente)
                 ->with('info', 'Cliente creado con éxito');
@@ -69,7 +68,6 @@ class ClienteController extends Controller
      */
     public function show(Cliente $cliente)
     {
-
         $timelines = Timeline::where('cliente_id', $cliente->id)
                                 ->orderBy('created_at', 'desc')
                                 ->get();
@@ -110,9 +108,15 @@ class ClienteController extends Controller
 
         Timeline::create([
             'cliente_id' => $cliente->id,
+            'admin_id' => \Auth::guard('admin')->user()->id,
+            'accion' => 'update_cliente',
+        ]);
+
+        /* Timeline::create([
+            'cliente_id' => $cliente->id,
             'accion' => 'update_cliente',
             'accion_id' => $cliente->id
-        ]);
+        ]); */
         
 
         return redirect()->route('admin.clientes.show', $cliente)

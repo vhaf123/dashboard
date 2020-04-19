@@ -21,8 +21,9 @@ class BoletaSeeder extends Seeder
 
             Timeline::create([
                 'cliente_id' => $boleta->cliente_id,
+                'admin_id' => 1,
                 'accion' => 'create_boleta',
-                'accion_id' => $boleta->id,
+                'boleta' => $boleta->id,
             ]);
         });
     }

@@ -44,4 +44,9 @@ class Admin extends Authenticatable
     {
         return $this->hasMany('App\Boleta');
     }
+
+    public function timelines()
+    {
+        return $this->hasMany('App\Timeline');
+    }
 }

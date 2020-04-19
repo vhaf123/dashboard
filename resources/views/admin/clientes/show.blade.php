@@ -116,8 +116,8 @@
                                     <div class="card borde-left borde-success">
 
                                         <h6 class="card-header">
-                                            <small class="text-secondary float-right"><i class="fas fa-clock"></i> {{$timeline->created_at->format('h:i A')}}</small>
-                                            <a href="#"><strong>Victor Arana</strong></a> creó al cliente {{$cliente->name}}
+                                            <small class="text-secondary float-right">{{$timeline->created_at->format('d/m/y - h:i A')}}</small>
+                                            <a href="#"><strong>{{$timeline->admin->name}}</strong></a> creó al cliente {{$cliente->name}}
                                         </h6>
                                         
                                     </div>
@@ -130,8 +130,8 @@
                                     <div class="card borde-left borde-warning">
 
                                         <h6 class="card-header">
-                                            <small class="text-secondary float-right"><i class="fas fa-clock"></i> {{$timeline->created_at->format('h:i A')}}</small>
-                                            <a href="#"><strong>Victor Arana</strong></a> actualizó la información del cliente
+                                            <small class="text-secondary float-right">{{$timeline->created_at->format('d/m/y - h:i A')}}</small>
+                                            <a href="#"><strong>{{$timeline->admin->name}}</strong></a> actualizó la información del cliente
                                         </h6>
                                         
                                     </div>
@@ -144,8 +144,8 @@
                                     <div class="card borde-left borde-primary">
                                         
                                         <h6 class="card-header">
-                                            <small class="text-secondary float-right"><i class="fas fa-clock"></i> {{$timeline->created_at->format('h:i A')}}</small>
-                                            <a href="#"><strong>Victor Arana</strong></a> agregó una nueva boleta
+                                            <small class="text-secondary float-right">{{$timeline->created_at->format('d/m/y - h:i A')}}</small>
+                                            <a href="#"><strong>{{$timeline->admin->name}}</strong></a> agregó la boleta {{$timeline->boleta}}
                                         </h6>
 
                                         <div class="card-body">
@@ -153,7 +153,7 @@
                                         </div>
 
                                         <div class="card-footer">
-                                            <a class="btn btn-primary btn-sm" href="#" role="button">Ver boleta</a>
+                                            <a class="btn btn-primary btn-sm" href="{{route('admin.boletas.show', $timeline->boleta)}}" role="button">Ver boleta</a>
                                             <a class="btn btn-danger btn-sm" href="#" role="button">Anular Boleta</a>
                                         </div>
                                     </div>

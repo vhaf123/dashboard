@@ -98,6 +98,7 @@ class BoletaController extends Controller
 
     public function agregarCursos(Request $request, Boleta $boleta)
     {
+
         $datos = $request->all();
 
         //formatear hora
@@ -106,14 +107,15 @@ class BoletaController extends Controller
         $datos['dias'] = implode( ", " ,$datos['dias']);
                
         Contratado::create($datos);
-        return view('admin.boletas.cursos.index', ['boleta' => $boleta]);
-
+        
+        return view('admin.boletas.partials.mostrarCursos', compact('boleta'));
     }
 
     public function borrarCursos(Request $request, Contratado $curso){
 
         $curso->delete();
-        return view('admin.boletas.cursos.index', ['boleta' => Boleta::find($curso->boleta_id)]);
+        return view('admin.boletas.partials.mostrarCursos', ['boleta' => Boleta::find($curso->boleta_id)]);
+        /* return view('admin.boletas.cursos.index', ['boleta' => Boleta::find($curso->boleta_id)]); */
         
     }
 

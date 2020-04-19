@@ -17,8 +17,8 @@ class ClienteSeeder extends Seeder
 
             Timeline::create([
                 'cliente_id' => $cliente->id,
+                'admin_id' => 1,
                 'accion' => 'create_cliente',
-                'accion_id' => $cliente->id,
             ]);
             
         });
