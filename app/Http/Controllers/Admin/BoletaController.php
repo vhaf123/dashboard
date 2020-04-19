@@ -90,7 +90,10 @@ class BoletaController extends Controller
      */
     public function destroy(Boleta $boleta)
     {
-        return $boleta;
+        $boleta->estado = "ANULADO";
+        $boleta->save();
+
+        return back();
     }
 
     public function agregarCursos(Request $request, Boleta $boleta)

@@ -46,7 +46,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
                 "cliente" => $boleta->cliente->name,
                 "coordinadora" => $boleta->admin->name,
                 "categoria" => $boleta->categoria->name,
-                "estado" => estadoBoletas($boleta->estado)
+                "estado" => estadoBoletas($boleta->estado),
+                "estado2" => $boleta->estado
+                /* "btn" => btnBoleta(route('admin.boletas.show', $boleta), route('admin.boletas.edit', $boleta), route('admin.boletas.destroy', $boleta), $boleta->estado) */
             ];
             $datos[] = $dato;
         }

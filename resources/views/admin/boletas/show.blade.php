@@ -92,7 +92,17 @@
     <div class="container">
         <div class="row">
             <div class="col">
+                
                 <div class="card card-outline card-info">
+
+                    @if ($boleta->estado == "ANULADO")
+                        <div class="ribbon-wrapper ribbon-xl">
+                            <div class="ribbon bg-danger text-lg">
+                            Anulado
+                            </div>
+                        </div>
+                    @endif
+
                     {{-- cabecera --}}
                     <div class="card-header bg-light">
                         
@@ -192,7 +202,7 @@
                             {{-- Agregar nuevo curso --}}
                             
                             <button type="button" class="btn btn-info btn-curso" data-toggle="modal" 
-                                data-target="#exampleModal"  @if ($boleta->estado == "DESCARGADO") disabled="" @endif>
+                                data-target="#exampleModal"  @if ($boleta->estado != "GENERADO") disabled="" @endif>
 
                                 <i class="fas fa-chalkboard mr-1"></i>
                                 Agregar curso
