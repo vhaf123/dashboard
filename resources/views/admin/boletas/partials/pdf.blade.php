@@ -6,49 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Boleta</title>
 
-    {{-- <style>
-        
-        .boleta{
-            color: #FF7D73;
-        }
-
-        .titulo{
-            margin-bottom: 0;
-            line-height: 24px;
-        }
-
-        .subtitulo{
-            margin-bottom: 0;
-            line-height: 16px;
-        }
-
-        
-        
-
-        .info strong{
-            font-weight: 600;
-        }
-        
-        .reporte{
-            background-color: rgba(97,197,211, 0.2);
-        }
-
-        .reporte p{
-            font-weight: 600;
-            color: #17A2B8;
-        }
-
-        .reporte p span{
-            font-weight: normal;
-            color: #5E5E5E;
-            float: right;
-        }
-
-
-    </style> --}}
-
-    
-
 </head>
 <body>
     
@@ -132,7 +89,7 @@
 
                         {{-- Listado de cursos --}}                           
                         <div class="col-12 col-md-7" id="boleta_cursos"> 
-                            @include('admin.boletas.cursos.index')
+                            @include('admin.boletas.partials.mostrarCursos')
                         </div>
 
                         {{-- Reporte de venta --}}

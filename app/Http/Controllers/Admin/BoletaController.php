@@ -88,12 +88,12 @@ class BoletaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Boleta $boleta)
     {
-        //
+        return $boleta;
     }
 
-    public function agregar(Request $request, Boleta $boleta)
+    public function agregarCursos(Request $request, Boleta $boleta)
     {
         $datos = $request->all();
 
@@ -107,16 +107,16 @@ class BoletaController extends Controller
 
     }
 
-    public function borrar(Request $request, Contratado $curso){
+    public function borrarCursos(Request $request, Contratado $curso){
 
         $curso->delete();
         return view('admin.boletas.cursos.index', ['boleta' => Boleta::find($curso->boleta_id)]);
         
     }
 
-    public function generar(Boleta $boleta){
+    public function generarPDF(Boleta $boleta){
 
-        $boleta->estado = "IMPRESO";
+        $boleta->estado = "DESCARGADO";
         $boleta->save();
       
         $pdf = resolve('dompdf.wrapper');

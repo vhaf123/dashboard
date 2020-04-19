@@ -25,7 +25,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-9">
 
                 <div class="card card-outline card-info shadow">
 
@@ -44,6 +44,7 @@
                                     <th>Cliente</th>
                                     <th>Cordinadora</th>
                                     <th>Categoría</th>
+                                    <th>Estado</th>
                                     <th>&nbsp;</th>
                                 </tr>
                             </thead>
@@ -77,6 +78,7 @@
                     { "data": 'cliente'},
                     { "data": 'coordinadora'},
                     { "data": 'categoria'},
+                    { "data": 'estado'},
                     { "data": 'btn'}
                 ],
                 "language": {
@@ -105,6 +107,8 @@
                 },
                 "order": [ 0, 'desc' ]
             });
+            
+            
         });
 
     </script>

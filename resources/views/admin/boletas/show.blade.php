@@ -33,6 +33,12 @@
             font-weight: 600;
         }
 
+        /* Tabla de cursos */
+        .cabecera-tabla{
+            background-color: #61C5D3;
+            color: white;
+        }
+
         /* Reporte */
 
         .reporte{
@@ -162,7 +168,7 @@
 
                             {{-- Listado de cursos --}}                           
                             <div class="col-12 col-md-7" id="boleta_cursos"> 
-                                @include('admin.boletas.cursos.index')
+                                @include('admin.boletas.partials.mostrarCursos')
                             </div>
 
                             {{-- Reporte de venta --}}
@@ -186,7 +192,7 @@
                             {{-- Agregar nuevo curso --}}
                             
                             <button type="button" class="btn btn-info btn-curso" data-toggle="modal" 
-                                data-target="#exampleModal"  @if ($boleta->estado == "IMPRESO") disabled="" @endif>
+                                data-target="#exampleModal"  @if ($boleta->estado == "DESCARGADO") disabled="" @endif>
 
                                 <i class="fas fa-chalkboard mr-1"></i>
                                 Agregar curso
@@ -199,11 +205,7 @@
                                 Descargar PDF
                             </a>
 
-                            {{-- Imprimir --}}
-                            {{-- <button class="btn btn-default ml-2">
-                                <i class="fas fa-print mr-1"></i>
-                                Imprimir
-                            </button> --}}
+                        
                         </div>
 
                     </div>
@@ -213,13 +215,9 @@
             </div>
         </div>
     </div>
-    
-    
 
     <!-- Ventanda modal: Agregar cursos -->
-    @include('admin.boletas.cursos.create')
-
-    
+    @include('admin.boletas.partials.agregarCursos')
 
 @endsection
 
@@ -370,7 +368,7 @@
             $('#generarPdf').click(function(){
                 setTimeout(function(){
                     location.reload();
-                },1000);
+                },500);
                 
             })
 

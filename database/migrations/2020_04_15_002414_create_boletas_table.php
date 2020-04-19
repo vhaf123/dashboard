@@ -15,7 +15,7 @@ class CreateBoletasTable extends Migration
     {
         Schema::create('boletas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->enum('estado', ['GENERADO', 'IMPRESO', 'ANULADO'])->default('GENERADO');
+            $table->enum('estado', ['GENERADO', 'DESCARGADO', 'ANULADO'])->default('GENERADO');
             $table->unsignedBigInteger('cliente_id');
             $table->unsignedBigInteger('categoria_id')->nullable();
             $table->integer('numero_alumnos')->unsigned()->default(1);

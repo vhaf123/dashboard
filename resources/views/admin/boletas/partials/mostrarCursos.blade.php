@@ -5,26 +5,14 @@
     $n = 0;
 @endphp
 
-<style>
-    
-
-    tbody tr td:first-child{
-        color: #5E5E5E;
-        /* font-weight: 600; */
-    }
-
-    .cabecera-tabla{
-        background-color: #39B2C3;
-        color: white;
-    }
-
-</style>
-
 <div class="table-responsive-md">
     <table class="table table-striped">
         <thead class="thead cabecera-tabla">
             <tr>
-                <th width = "10px">&nbsp;</th>
+                @if ($boleta->estado == 'GENERADO')
+                    <th width = "10px">&nbsp;</th>                    
+                @endif
+                
                 <th width = "140px">&nbsp;</th>
                 <th>Curso</th>
                 <th>Nivel</th>
@@ -50,9 +38,7 @@
                                         <i class="fas fa-times text-danger"></i>
                                     </button>
                                 </form>
-                            </td>
-                        @else
-                            <td></td>
+                            </td>                   
                         @endif
                         
                         <td>{{$clases[$n++]}}</td>
@@ -67,9 +53,18 @@
 
                 @if ($boleta->contratados->count() < 4)
                     @for ($i = 0; $i < 4 - $boleta->contratados->count(); $i++)
-                        <tr>
-                            <td colspan="6">&nbsp;</td>
-                        </tr>
+
+                        @if ($boleta->estado == 'GENERADO')
+                            <tr>
+                                <td colspan="6">&nbsp;</td>
+                            </tr>
+                        @else
+                            <tr>
+                                <td colspan="5">&nbsp;</td>
+                            </tr>
+                        @endif
+
+                        
                     @endfor
                 @endif
 

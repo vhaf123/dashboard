@@ -45,9 +45,9 @@ Route::group(['prefix' => 'admin',  'middleware' => 'admin'], function(){
   
   Route::resource('boletas', 'Admin\BoletaController')->names('admin.boletas');
   
-  Route::post('agregar/curso/{boleta}', 'Admin\BoletaController@agregar')->name('agregar.cursos');
-  Route::delete('borrar/curso/{curso}', 'Admin\BoletaController@borrar')->name('borrar.cursos');
-  Route::get('generar/pdf/{boleta}', 'Admin\BoletaController@generar')->name('generar.pdf');
+  Route::post('agregar/curso/{boleta}', 'Admin\BoletaController@agregarCursos')->name('agregar.cursos');
+  Route::delete('borrar/curso/{curso}', 'Admin\BoletaController@borrarCursos')->name('borrar.cursos');
+  Route::get('generar/pdf/{boleta}', 'Admin\BoletaController@generarPDF')->name('generar.pdf');
 });
 
 
