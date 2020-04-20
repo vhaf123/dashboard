@@ -14,7 +14,7 @@
     <div class="container pb-4">
         
         <div class="row justify-content-center">
-            <div class="col-lg-7">
+            <div class="col-md-9 col-lg-6">
 
                 <div class="card card-outline card-info shadow">
 

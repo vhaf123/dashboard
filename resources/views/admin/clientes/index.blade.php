@@ -106,6 +106,46 @@
             },
             "order": [ 0, 'desc' ]
         });
+
+      
+        function AlertaEliminar(direccion){
+
+            Swal.fire({
+                title: '¿Estas seguro de esta acción?',
+                text: "¡Se borrará todos los datos relacionados del cliente!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '¡Sí, bórralo!'
+            }).then((result) => {
+                
+                if (result.value) {
+                                
+                    $.ajax({
+                        url: direccion,
+                        data: {
+                            "_method" : 'delete'
+                        },
+                        type: 'POST',
+                        success: function(data){
+
+                            $('#clientes').dataTable()._fnAjaxUpdate();
+                            
+                            Swal.fire(
+                            '¡Eliminado!',
+                            'El cliente se eliminó con éxito',
+                            'success'
+                            )
+                        }
+
+                    });
+                    
+                }
+            })
+        }
+
+      
      
     </script>
 

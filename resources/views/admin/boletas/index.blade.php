@@ -109,6 +109,43 @@
             });
         });
 
+        function AlertaAnular(direccion){
+
+
+            Swal.fire({
+                title: '¿Estas seguro de anular esta boleta?',
+                text: "¡Una vez anulado no hay vuelta atrás!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '¡Sí, anular!'
+            }).then((result) => {
+                if (result.value) {
+                                
+                    $.ajax({
+                        url: direccion,
+                        data: {
+                            "_method" : 'delete'
+                        },
+                        type: 'POST',
+                        success: function(data){
+                           
+                            $('#boletas').dataTable()._fnAjaxUpdate();
+                            
+                            Swal.fire(
+                            '¡Anulado!',
+                            'La boleta se anuló con éxito',
+                            'success'
+                            )
+                        }
+
+                    });
+                    
+                }
+            })
+        }
+
     </script>
 
 

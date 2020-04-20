@@ -7,16 +7,21 @@
         <i class="fas fa-edit"></i>
     </a>
 
+    @php
+        $ruta = route('admin.clientes.destroy', $id);
+    @endphp
 
-    <form method="POST" action="{{route('admin.clientes.destroy', $id)}}" style="display: inline;">
+    <button class="btn btn-danger btn-sm" onclick="AlertaEliminar('{{$ruta}}')">
+        <i class="fas fa-eraser"></i>
+    </button>
+
+    {{-- <form method="POST" action="{{route('admin.clientes.destroy', $id)}}" style="display: inline;">
         
-        {{-- <input name="_method" type="hidden" value="DELETE"> --}}
-
         @method('DELETE')
         @csrf
 
         <button class="btn btn-danger btn-sm">
             <i class="fas fa-eraser"></i>
         </button>
-    </form>
+    </form> --}}
 </div>

@@ -134,7 +134,7 @@ class BoletaController extends Controller
         $boleta->estado = "ANULADO";
         $boleta->save();
 
-        return back();
+        /* return back(); */
     }
 
     public function agregarCursos(Request $request, Boleta $boleta)

@@ -8,8 +8,15 @@
         <i class="fas fa-edit"></i>
     </a>
 
+    @php
+        $ruta = route('admin.boletas.destroy', $id);
+    @endphp
 
-    <form method="POST" action="{{route('admin.boletas.destroy', $id)}}" style="display: inline;">
+    <button class="btn btn-danger btn-sm" onclick="AlertaAnular('{{$ruta}}')" @if($estado2 == 'ANULADO') disabled @endif>
+        <i class="fas fa-eraser"></i>
+    </button>
+
+    {{-- <form method="POST" action="{{route('admin.boletas.destroy', $id)}}" style="display: inline;">
 
         @method('DELETE')
         @csrf
@@ -17,5 +24,5 @@
         <button class="btn btn-danger btn-sm" @if($estado2 == 'ANULADO') disabled @endif>
             <i class="fas fa-eraser"></i>
         </button>
-    </form>
+    </form> --}}
 </div>
