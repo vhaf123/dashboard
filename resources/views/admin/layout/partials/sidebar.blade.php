@@ -61,7 +61,7 @@
 
         {{-- Administradores --}}
         <li class="nav-item">
-          <a href="#" class="nav-link {{setActive('administradores.*')}}">
+          <a href="#" class="nav-link {{setActive('admin.administradores.*')}}">
             <i class="nav-icon fas fa-users-cog"></i>
             <p>Administradores</p>
           </a>
@@ -69,8 +69,8 @@
 
 
         {{-- Asesores --}}
-        <li class="nav-item has-treeview {{setOpen('asesores.*')}}">
-          <a href="#" class="nav-link {{setActive('asesores.*')}}">
+        <li class="nav-item has-treeview {{setOpen('admin.asesores.*')}}">
+          <a href="#" class="nav-link {{setActive('admin.asesores.*')}}">
             <i class="nav-icon fas fa-user-graduate"></i>
             <p>
               Asesores
@@ -79,14 +79,14 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="#" class="nav-link {{setActive('asesores.index')}}">
+              <a href="{{route('admin.asesores.index')}}" class="nav-link {{setActive('admin.asesores.index')}}">
                 <i class="nav-icon far fa-circle text-info"></i>
                 <p>Lista de Asesores</p>
               </a>
             </li>
            
             <li class="nav-item">
-              <a href="#" class="nav-link {{setActive('asesores.create')}}">
+              <a href="{{route('admin.asesores.create')}}" class="nav-link {{setActive('admin.asesores.create')}}">
                 <i class="nav-icon far fa-circle text-warning"></i>
                 <p>Crear Nuevo Asesor</p>
               </a>

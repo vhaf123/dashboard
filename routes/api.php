@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use Illuminate\Support\Facades\DB;
-
+use App\Models\Asesor;
 
 
 /*
@@ -26,7 +26,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 /* Datatable */
     Route::get('clientes', function () {
         
-        $clientes = DB::table('clientes')->select("id", "name", "telefono", "direccion")->get();
+        $clientes = DB::table('clientes')->select("id", "name", "telefono", "direccion")->orderBy('id', 'DESC')->get();
 
         return datatables()
                 ->of($clientes)
@@ -35,10 +35,20 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
                 ->toJson();
     });
 
+    Route::get('asesores', function () {
+
+        $asesores = DB::table('asesors')->select("id", "email", "name")->get();
+
+        return datatables()
+            ->of($asesores)
+            ->addColumn('btn', 'admin/asesores/partials/actions')
+            ->rawColumns(['btn'])
+            ->toJson();
+    });
 
     Route::get('boletas', function () {
 
-        $boletas = App\Boleta::select("id", "cliente_id", "admin_id", "categoria_id", "estado")->get();
+        $boletas = App\Boleta::select("id", "cliente_id", "admin_id", "categoria_id", "estado")->orderBy('id', 'DESC')->get();
 
         foreach ($boletas as $boleta){
             $dato = [
@@ -46,15 +56,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
                 "cliente" => $boleta->cliente->name,
                 "coordinadora" => $boleta->admin->name,
                 "categoria" => $boleta->categoria->name,
-                "estado" => estadoBoletas($boleta->estado),
-                "estado2" => $boleta->estado
+                "estado" => $boleta->estado
             ];
             $datos[] = $dato;
         }
         
         return datatables()
                 ->of($datos)
-                ->addColumn('btn', 'admin/boletas/actions')
+                ->addColumn('btn', 'admin/boletas/partials/actions')
+                ->addColumn('estado', 'admin/boletas/partials/estados')
                 ->rawColumns(['btn', 'estado'])
                 ->toJson();
 

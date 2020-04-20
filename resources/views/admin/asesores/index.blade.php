@@ -1,6 +1,6 @@
 @extends('admin.layout.app')
 
-@section('title', 'Clientes')
+@section('title', 'Asesores')
 
 @section('link')
     <!-- DataTables -->
@@ -8,43 +8,26 @@
     <link rel="stylesheet" href="{{asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
 @endsection
 
-@section('breadcrumbs')
-    <div class="row mb-2">
-        <div class="col-sm-6">
-            
-        </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="{{route('admin.home')}}">Admin</a></li>
-            {{-- <li class="breadcrumb-item"><a href="{{route('admin.clientes.index')}}">Clientes</a></li> --}}
-            <li class="breadcrumb-item active">Clientes</li>
-            </ol>
-        </div>
-    </div>
-@endsection
-
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-10">
+            <div class="col-md-8">
 
                 <div class="card card-outline card-info shadow">
 
                     <div class="card-header">
-                        <h3 class="card-title mt-2">Lista de Clientes</h3>    
-                        <a href="{{route('admin.clientes.create')}}" class="btn btn-outline-info float-right">Agregar</a>
-                        
+                        <h3 class="card-title mt-2">Lista de Asesores</h3>    
+                        <a href="{{route('admin.asesores.create')}}" class="btn btn-outline-info float-right">Agregar</a>
                     </div>
 
                     <div class="card-body">
-                        <table id="clientes" class="table table-striped table-hover">
+                        <table id="asesores" class="table table-striped table-hover">
                             <thead>
                                 <tr>
-                                    <th>Código</th>
+                                    <th width = "10px">ID</th>
                                     <th>Nombre</th>
-                                    <th>Teléfono</th>
-                                    <th>Dirección</th>
-                                    <th width="10px">&nbsp;</th>
+                                    <th>Email</th>
+                                    <th>&nbsp</th>
                                 </tr>
                             </thead>
                             
@@ -59,29 +42,30 @@
 
 
 @section('script')
+
     <!-- DataTables -->
     <script src="{{asset('plugins/datatables/jquery.dataTables.js')}}"></script>
     <script src="{{asset('plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>
     <script src="{{asset('plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
     <script src="{{asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
 
+
     <script>
 
-        $('#clientes').DataTable( {
+        $('#asesores').DataTable( {
             "responsive": true,
             "autoWidth": false,
             
             "serverSide": true,
-            "ajax": "{{url('api/clientes')}}",
+            "ajax": "{{url('api/asesores')}}",
             "columns": [
                 { "data": 'id'},
                 { "data": 'name'},
-                { "data": 'telefono'},
-                { "data": 'direccion'},
+                { "data": 'email'},
                 { "data": 'btn'}
             ],
             "language": {
-                'info' : "Mostrando del _START_ al _END_ (total de registros _TOTAL_)",
+                'info' : "Del _START_ al _END_ (total _TOTAL_)",
                 "infoFiltered":   "",
                 "search" : "Buscar:",
                 "paginate" : {
@@ -107,12 +91,12 @@
             "order": [ 0, 'desc' ]
         });
 
-      
+     
         function AlertaEliminar(direccion){
 
             Swal.fire({
                 title: '¿Estas seguro de esta acción?',
-                text: "¡Se borrará todos los datos relacionados al cliente!",
+                text: "¡Se borrará todos los datos relacionados al asesor!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -130,11 +114,11 @@
                         type: 'POST',
                         success: function(data){
 
-                            $('#clientes').dataTable()._fnAjaxUpdate();
+                            $('#asesores').dataTable()._fnAjaxUpdate();
                             
                             Swal.fire(
                             '¡Eliminado!',
-                            'El cliente se eliminó con éxito',
+                            'El asesor se eliminó con éxito',
                             'success'
                             )
                         }
@@ -144,10 +128,6 @@
                 }
             })
         }
-
-      
-     
+    
     </script>
-
-
 @endsection

@@ -42,7 +42,7 @@ Route::group(['prefix' => 'admin',  'middleware' => 'admin'], function(){
   Route::get('/', 'Admin\HomeController@index')->name('admin.home');
 
   Route::resource('clientes', 'Admin\ClienteController')->names('admin.clientes');
-  
+  Route::resource('asesores', 'Admin\AsesorController')->names('admin.asesores')->parameters(['asesores' => 'asesor']);;
   Route::resource('boletas', 'Admin\BoletaController')->names('admin.boletas');
   
   Route::post('agregar/curso/{boleta}', 'Admin\BoletaController@agregarCursos')->name('agregar.cursos');

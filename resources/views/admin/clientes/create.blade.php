@@ -14,7 +14,7 @@
     <div class="container pb-4">
         
         <div class="row justify-content-center">
-            <div class="col-md-9 col-lg-6">
+            <div class="col-md-9 col-lg-7">
 
                 <div class="card card-outline card-info shadow">
 
@@ -24,9 +24,9 @@
                         {!! Form::open(['route' => 'admin.clientes.store', 'autocomplete'=> 'off']) !!}
 
                             {{-- Cabecera --}}
-                            <h5 class="text-secondary">
+                            <h6 class="text-secondary">
                                 CREAR UN NUEVO CLIENTE
-                            </h5>
+                            </h6>
                             
                             <hr>
                             
