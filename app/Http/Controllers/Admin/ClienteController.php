@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\Cliente;
 use App\Timeline;
@@ -71,8 +72,13 @@ class ClienteController extends Controller
         $timelines = Timeline::where('cliente_id', $cliente->id)
                                 ->orderBy('created_at', 'desc')
                                 ->get();
+
+        $categorias = DB::table('categorias')->orderBy('name', 'ASC')->pluck('name', 'id');
+        $instituciones = DB::table('instituciones')->pluck('name', 'id');
+        $paquetes = DB::table('paquetes')->pluck('name', 'id');
+        $admins = DB::table('admins')->orderBy('name', 'ASC')->pluck('name', 'id');
         
-        return view('admin.clientes.show', compact('cliente', 'timelines'));
+        return view('admin.clientes.show', compact('cliente', 'timelines', 'categorias', 'instituciones', 'paquetes', 'admins'));
     }
 
     /**
@@ -81,9 +87,9 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Cliente $cliente)
     {
-        return view('admin.clientes.edit');
+        return view('admin.clientes.edit', compact('cliente'));
     }
 
     /**
@@ -120,7 +126,7 @@ class ClienteController extends Controller
         
 
         return redirect()->route('admin.clientes.show', $cliente)
-                ->with('info', 'Cliente creado con éxito');
+                ->with('info', 'Información del cliente ' . $cliente->name . ' actualizado con éxito');
     }
 
     /**

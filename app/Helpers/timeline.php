@@ -5,15 +5,15 @@
 
         switch ($estado) {
             case 'GENERADO':
-                return "<span class = 'text-info'>Generado</span>";
+                return "<strong class = 'text-info'>Generado</strong>";
             break;
             
             case 'DESCARGADO':
-                return "<span class = 'text-success'>Descargado</span>";
+                return "<strong class = 'text-success'>Descargado</strong>";
             break;
 
             case 'ANULADO':
-                return "<span class = 'text-danger'>Anulado</span>";
+                return "<strong class = 'text-danger'>Anulado</strong>";
             break;
         }
 

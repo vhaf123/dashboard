@@ -263,6 +263,7 @@
             });
 
         /* Tempusdominus Bootstrap 4 */
+
             $('#inicio').datetimepicker({
                     format: 'hh:mm a'
             });
@@ -270,6 +271,8 @@
             $('#final').datetimepicker({
                 format: 'hh:mm a'
             });
+
+        
 
         /* Validar formulario */
             $('#agregar').click(validar_formulario);

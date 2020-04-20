@@ -3,6 +3,9 @@
 @section('title', 'Home')
 
 @section('link')
+    {{-- daterangepicker --}}
+    <link rel="stylesheet" href="{{asset('plugins/daterangepicker/daterangepicker.css')}}">
+
     <style>
 
         .container{
@@ -32,6 +35,10 @@
             color: #007BFF;
             border-bottom-style: solid;
         }
+
+        /* .card h5{
+            color: #007BFF!important;
+        } */
         
 
     </style>
@@ -145,7 +152,7 @@
                                         
                                         <h6 class="card-header">
                                             <small class="text-secondary float-right">{{$timeline->created_at->format('d/m/y - h:i A')}}</small>
-                                            <a href="#"><strong>{{$timeline->admin->name}}</strong></a> agregó la boleta {{$timeline->boleta}}
+                                            <a href="#"><strong>{{$timeline->admin->name}}</strong></a> le asignó la boleta {{$timeline->boleta}}
                                         </h6>
 
                                         <div class="card-body">
@@ -173,115 +180,50 @@
                             <div class="card-body">
                                 {!! Form::model($cliente, ['route' => ['admin.clientes.update', $cliente->id], 'method' => 'PUT']) !!}
     
-                                {{-- Cabecera --}}
-                                <h5 class="text-primary">Información del cliente</h5>
+                                    {{-- Cabecera --}}
+                                    <h5 class="text-secondary">INFORMACIÓN DEL CLIENTE</h5>
 
-                                <hr>
-                                
-                                <div class="form-row">
-    
-                                    {{-- cliente --}}
-                                    <div class="form-group col-md-12">
-                                        
-                                        {!! Form::label("name", "Nombre del Cliente") !!}
-                                        {{-- <label for="name" class="text-secondary">Nombre del Cliente</label> --}}
-                                        {!! Form::text("name", null, ["class" => "form-control" . ( $errors->has('telefono') ? ' is-invalid' : '' ), "placeholder" => "Escribe el nombre del cliente ...", 'autofocus']) !!}
-                                        {{-- <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" placeholder="Escribe el nombre del cliente ..." autofocus> --}}
-                                        
-                                        @error('name')
-                                            <span class="invalid-feedback" role="alert">
-                                                {{ $message }}
-                                            </span>
-                                        @enderror
-                                        
-                                    </div>
-                                
-                                    {{-- Telefono --}}
-                                    <div class="form-group col-md-6">
-                                        {!! Form::label("telefono", "Teléfono", ["class"=>"text-secondary"]) !!}
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                                            </div>
-                                            {!! Form::number("telefono", null, ["class" => "form-control" . ( $errors->has('telefono') ? ' is-invalid' : '' ), "placeholder" => "Teléfono"]) !!}
-                                        </div>
-                                        @error('telefono')
-                                        
-                                            <small class="text-danger" role="alert">
-                                                {{ $message }}
-                                            </small>
-                                        @enderror
+                                    <hr>
+                                    
+                                    @include('admin.clientes.partials.form')
+        
+                                                                    
+                                    <div class="form-group float-right">
+                                        <button type="submit" class="btn btn-primary px-3">
+                                            Actualizar
+                                        </button>
                                     </div>
     
-                                    {{-- DNI --}}
-                                    <div class="form-group col-md-6">
-                                        {!! Form::label("dni", "DNI", ["class"=>"text-secondary"]) !!}
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-address-card"></i></span>
-                                            </div>
-                                            {!! Form::number("dni", null, ["class" => "form-control" . ( $errors->has('dni') ? ' is-invalid' : '' ), "placeholder" => "DNI"]) !!}
-                                            @error('dni')
-                                                <span class="invalid-feedback" role="alert">
-                                                    {{ $message }}
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-    
-                                    {{-- Direccion --}}
-                                    <div class="form-group col-md-6">
-                                        {!! Form::label("direccion", "Dirección", ["class"=>"text-secondary"]) !!}
-                                        {!! Form::text("direccion", null, ["class" => "form-control" . ( $errors->has('direccion') ? ' is-invalid' : '' ), "placeholder" => "Dirección"]) !!}
-                                        @error('direccion')
-                                            <span class="invalid-feedback" role="alert">
-                                                {{ $message }}
-                                            </span>
-                                        @enderror
-                                    </div>
-    
-                                    {{-- Distrito --}}
-                                    <div class="form-group col-md-6">
-                                        {!! Form::label("distrito", "Distrito", ["class"=>"text-secondary"]) !!}
-                                        {!! Form::text("distrito", null, ["class" => "form-control" . ( $errors->has('distrito') ? ' is-invalid' : '' ), "placeholder" => "Distrito"]) !!}
-                                        @error('distrito')
-                                            <span class="invalid-feedback" role="alert">
-                                                {{ $message }}
-                                            </span>
-                                        @enderror
-                                    </div>
-                                        
-                                </div>
-    
-                                <h5 class="text-primary mt-4 mb-3">
-                                    Referencia
-                                </h5>
-    
-                                {{-- Referencia --}}
-                                <div class="form-group">
-                                    {!! Form::label("referencia", "Referencia", ["class"=>"d-none"]) !!}
-                                    {!! Form::textarea("referencia", null, ["class" => "form-control" . ( $errors->has('referencia') ? ' is-invalid' : '' ), "placeholder" => "Escriba una referencia detallada del domicilio ..."])!!}
-                                    @error('referencia')
-                                        <span class="invalid-feedback" role="alert">
-                                            {{ $message }}
-                                        </span>
-                                    @enderror
-                                </div>
-                                   
-                                <div class="form-group float-right">
-                                    <button type="submit" class="btn btn-primary px-3">
-                                        Actualizar
-                                    </button>
-                                </div>
-    
-                            {!! Form::close() !!}
+                                {!! Form::close() !!}
                             </div>
                         </div>
     
                     </div>
-    
+                    
+                    {{-- Nueva Boleta --}}
                     <div class="tab-pane fade" id="boleta" role="tabpanel" aria-labelledby="boleta-tab">
-                        Nueva Boleta
+                        
+                        <div class="card shadow">
+                    
+                            <div class="card-body">
+                                {!! Form::open(['route' => 'admin.boletas.store', 'autocomplete'=> 'off']) !!}
+                                    <h5 class="text-secondary">
+                                        CREAR NUEVA BOLETA
+                                    </h5>
+                                    <hr>
+        
+                                    @include('admin.clientes.partials.form-boleta')
+        
+                                    <div class="form-group float-right">
+                                        <button type="submit" class="btn btn-md btn-primary">
+                                            Registrar
+                                        </button>
+                                    </div>
+        
+                                {!! Form::close() !!}
+                            </div>
+                        </div>   
+
                     </div>
 
                     <div class="tab-pane fade" id="pago" role="tabpanel" aria-labelledby="pago-tab">
@@ -326,4 +268,24 @@
     </div>
 
   
+@endsection
+
+@section('script')
+    {{-- daterangepicker --}}
+    <script src="{{asset('plugins/daterangepicker/moment.min.js')}}"></script>
+    <script src="{{asset('plugins/daterangepicker/daterangepicker.js')}}"></script>
+
+    <script>
+        /* daterangepicker */
+        $("#fecha").daterangepicker({
+            "locale": {
+                "format": "DD/MM/YYYY",
+                "applyLabel": "Aplicar",
+                "cancelLabel": "Cancelar",
+                "daysOfWeek": ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+                "monthNames": ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", 
+                "Agosto", "Setiembre", "Octumbre", "Noviembre", "Diciembre"],
+            }
+        });
+    </script>
 @endsection

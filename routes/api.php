@@ -48,7 +48,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
                 "categoria" => $boleta->categoria->name,
                 "estado" => estadoBoletas($boleta->estado),
                 "estado2" => $boleta->estado
-                /* "btn" => btnBoleta(route('admin.boletas.show', $boleta), route('admin.boletas.edit', $boleta), route('admin.boletas.destroy', $boleta), $boleta->estado) */
             ];
             $datos[] = $dato;
         }
@@ -61,5 +60,19 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
     });
 
-    
-/*Procesar cursos*/
+/* select2 */
+    Route::get('select2/clientes', function (Request $request) {
+
+        $term = $request->term ?: '';
+        $clientes = DB::table('clientes')->where('name', 'like', $term.'%')->select('id', 'name')->orderBy('name', 'ASC')->get();
+
+        foreach($clientes as $cliente){
+            $valid_tags[] = [
+                'id' => $cliente->id,
+                'text' => $cliente->name
+            ];
+        }
+
+        return \Response::json($valid_tags);
+        
+    });

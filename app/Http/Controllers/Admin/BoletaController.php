@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade as PDF;
 
 use App\Boleta;
@@ -30,7 +31,13 @@ class BoletaController extends Controller
      */
     public function create()
     {
-        //
+        $clientes = DB::table('clientes')->orderBy('name', 'ASC')->pluck('name', 'id');
+        $categorias = DB::table('categorias')->orderBy('name', 'ASC')->pluck('name', 'id');
+        $instituciones = DB::table('instituciones')->pluck('name', 'id');
+        $paquetes = DB::table('paquetes')->pluck('name', 'id');
+        $admins = DB::table('admins')->orderBy('name', 'ASC')->pluck('name', 'id');
+
+        return view('admin.boletas.create', compact('clientes', 'categorias', 'instituciones', 'paquetes', 'admins'));
     }
 
     /**
@@ -41,7 +48,35 @@ class BoletaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'cliente_id' => 'required',
+            'numero_alumnos' => 'required',
+            'alumno' => 'required',
+            "horas" => 'required',
+            "sesiones" => 'required',
+            'anticipo' => 'required',
+        ]);
+
+        $fecha = explode(' - ', $request->get('fecha'));
+        $precio = DB::table('categorias')->find($request->get('categoria_id'))->precio_cli;
+        $datos = $request->all();
+
+        $datos['inicio'] = Carbon::createFromFormat( 'd/m/Y', $fecha[0], 'GMT');
+        $datos['culminacion'] = Carbon::createFromFormat( 'd/m/Y', $fecha[1]);
+        $datos['costo'] = $precio * $request->get('horas');
+        $datos['saldo'] = $datos['costo'] - $request->get('anticipo');
+
+        $boleta = Boleta::create($datos);
+
+        Timeline::create([
+            'cliente_id' => $boleta->cliente_id,
+            'admin_id' => \Auth::guard('admin')->user()->id,
+            'accion' => 'create_boleta',
+            'boleta' => $boleta->id
+        ]);
+    
+        return redirect()->route('admin.boletas.show', $boleta)->with('info', 'Boleta ' . $boleta->id . ' creado con éxito');
     }
 
     /**
@@ -65,9 +100,15 @@ class BoletaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Boleta $boleta)
     {
-        //
+        $clientes = DB::table('clientes')->orderBy('name', 'ASC')->pluck('name', 'id');
+        $categorias = DB::table('categorias')->orderBy('name', 'ASC')->pluck('name', 'id');
+        $instituciones = DB::table('instituciones')->pluck('name', 'id');
+        $paquetes = DB::table('paquetes')->pluck('name', 'id');
+        $admins = DB::table('admins')->orderBy('name', 'ASC')->pluck('name', 'id');
+
+        return view('admin.boletas.edit', compact('boleta', 'clientes', 'categorias', 'instituciones', 'paquetes', 'admins'));
     }
 
     /**

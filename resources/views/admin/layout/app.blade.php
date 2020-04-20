@@ -73,12 +73,23 @@
     <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
     
     <script>
+
+        /* Tostadas */
         const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
             showConfirmButton: false,
             timer: 3000
         });
+
+        @if (session('info'))
+            Toast.fire({
+                icon: 'success',
+                title: "{{session('info')}}"
+            });
+        @endif
+
+
     </script>
 
     @yield('script')

@@ -1,6 +1,6 @@
 @extends('admin.layout.app')
 
-@section('title', 'Editarr Boleta')
+@section('title', 'Crear Boleta')
 
 @section('link')
     <!-- Select2 -->
@@ -15,17 +15,16 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card shadow">
+                <div class="card card-outline card-info shadow">
                     
                     <div class="card-body">
-                        {!! Form::model($boleta, ['route' => ['admin.boletas.update', $boleta->id], 'method' => 'PUT']) !!}
-                        {{-- {!! Form::open(['route' => 'admin.boletas.store', 'autocomplete'=> 'off']) !!} --}}
+                        {!! Form::open(['route' => 'admin.boletas.store', 'autocomplete'=> 'off']) !!}
                             <h5 class="text-secondary">
                                 <a href="{{route('admin.clientes.create')}}" class="btn btn-sm btn-info float-right">
                                     <i class="fas fa-user-plus"></i>
                                     Nuevo Cliente
                                 </a>
-                                EDITAR BOLETA
+                                CREAR UNA NUEVA BOLETA
                             </h5>
                             <hr>
 
