@@ -61,7 +61,6 @@
 
                                 {!! Form::text("h_inicio", "12:00 pm", ["class" => "form-control datetimepicker-input", "data-target" => "#inicio", "id" => "h_inicio"]) !!}
 
-                                {{-- <input name="h_inicio" value ="12:00 pm" class="form-control datetimepicker-input" data-target="#inicio"/> --}}
                                 <div class="input-group-append" data-target="#inicio" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="far fa-clock"></i></div>
                                 </div>

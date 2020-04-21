@@ -111,8 +111,8 @@
         function AlertaEliminar(direccion){
 
             Swal.fire({
-                title: '¿Estas seguro de esta acción?',
-                text: "¡Se borrará todos los datos relacionados al cliente!",
+                title: '¿Estas seguro de querer eliminar este cliente?',
+                text: "¡Se borrará también todos los datos relacionados a él!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

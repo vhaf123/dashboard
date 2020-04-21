@@ -67,54 +67,52 @@
 
     <script>
 
-        $(function () {
-            $('#boletas').DataTable( {
-                "responsive": true,
-                "autoWidth": false,
-                "serverSide": true,
-                "ajax": "{{url('api/boletas')}}",
-                "columns": [
-                    { "data": 'id'},
-                    { "data": 'cliente'},
-                    { "data": 'coordinadora'},
-                    { "data": 'categoria'},
-                    { "data": 'estado'},
-                    { "data": 'btn'}
-                ],
-                "language": {
-                    'info' : "Mostrando del _START_ al _END_ (total de registros _TOTAL_)",
-                    "infoFiltered":   "",
-                    "search" : "Buscar:",
-                    "paginate" : {
-                        "next" : "Siguiente",
-                        "previous" : "Anterior"
-                    },
-                    "lengthMenu": "mostrar <select class='custom-select custom-select-sm form-control form-control-sm'>" + 
-                                    '<option value = "10">10</option>' +
-                                    '<option value = "25">25</option>' +
-                                    '<option value = "50">50</option>' +
-                                    '<option value = "100">100</option>' +
-                                    '<option value = "-1">Todos</option>' +
-                                    '</select> registros',
-                    "infoEmpty": "Ningún registro coincide con los datos brindados",
-                    "zeroRecords": "No se encontraron registros coincidentes",
-                    
-                    
-                    "emptyTable": "Actualmente no tiene ningún cliente registrado",
-
-                    "loadingRecords": "Cargando...",
-                    "processing": "Procesando...",
+        $('#boletas').DataTable( {
+            "responsive": true,
+            "autoWidth": false,
+            "serverSide": true,
+            "ajax": "{{url('api/boletas')}}",
+            "columns": [
+                { "data": 'id'},
+                { "data": 'cliente'},
+                { "data": 'coordinadora'},
+                { "data": 'categoria'},
+                { "data": 'estado'},
+                { "data": 'btn'}
+            ],
+            "language": {
+                'info' : "Mostrando del _START_ al _END_ (total de registros _TOTAL_)",
+                "infoFiltered":   "",
+                "search" : "Buscar:",
+                "paginate" : {
+                    "next" : "Siguiente",
+                    "previous" : "Anterior"
                 },
-                "order": [ 0, 'desc' ]
-            });
-        });
+                "lengthMenu": "mostrar <select class='custom-select custom-select-sm form-control form-control-sm'>" + 
+                                '<option value = "10">10</option>' +
+                                '<option value = "25">25</option>' +
+                                '<option value = "50">50</option>' +
+                                '<option value = "100">100</option>' +
+                                '<option value = "-1">Todos</option>' +
+                                '</select> registros',
+                "infoEmpty": "Ningún registro coincide con los datos brindados",
+                "zeroRecords": "No se encontraron registros coincidentes",
+                
+                
+                "emptyTable": "Actualmente no tiene ningún cliente registrado",
 
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+            },
+            "order": [ 0, 'desc' ]
+        });
+        
         function AlertaAnular(direccion){
 
 
             Swal.fire({
-                title: '¿Estas seguro de anular esta boleta?',
-                text: "¡Una vez anulado no hay vuelta atrás!",
+                title: '¿Estas seguro de querer anular esta boleta?',
+                text: "¡Una vez anulada no hay vuelta atrás!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

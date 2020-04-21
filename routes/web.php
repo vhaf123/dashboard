@@ -41,13 +41,24 @@ Route::group(['prefix' => 'admin'], function () {
 Route::group(['prefix' => 'admin',  'middleware' => 'admin'], function(){
   Route::get('/', 'Admin\HomeController@index')->name('admin.home');
 
+  /* Clientes */
   Route::resource('clientes', 'Admin\ClienteController')->names('admin.clientes');
-  Route::resource('asesores', 'Admin\AsesorController')->names('admin.asesores')->parameters(['asesores' => 'asesor']);;
-  Route::resource('boletas', 'Admin\BoletaController')->names('admin.boletas');
   
+  /* Asesores */
+  Route::resource('asesores', 'Admin\AsesorController')->names('admin.asesores')->parameters(['asesores' => 'asesor']);;
+
+  /* Boletas */
+  Route::resource('boletas', 'Admin\BoletaController')->names('admin.boletas');
   Route::post('agregar/curso/{boleta}', 'Admin\BoletaController@agregarCursos')->name('agregar.cursos');
   Route::delete('borrar/curso/{curso}', 'Admin\BoletaController@borrarCursos')->name('borrar.cursos');
   Route::get('generar/pdf/{boleta}', 'Admin\BoletaController@generarPDF')->name('generar.pdf');
+
+  /* Asesorias */
+  Route::get('asesorias/pendientes', 'Admin\AsesoriaController@pendientes')->name('admin.asesorias.pendientes');
+  Route::post('asignar/paquete', 'Admin\AsesoriaController@asignarPaquete')->name('admin.asignar.paquete');
+  Route::delete('eliminar/paquete/{contratado}', 'Admin\AsesoriaController@eliminarPaquete')->name('admin.eliminar.paquete');
+  Route::get('nuevo/paquete', 'Admin\AsesoriaController@nuevoPaquete')->name('admin.asesorias.nuevoPaquete');
+
 });
 
 

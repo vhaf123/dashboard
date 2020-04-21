@@ -137,7 +137,7 @@
 
             <p>
               {{Auth::guard('admin')->user()->name}} - Coordinador
-              <small>Miembro desde Nov. 2012</small>
+              <small>Miembro desde {{Auth::guard('admin')->user()->created_at->diffForHumans()}}</small>
             </p>
           </li>
           <!-- Menu Body -->

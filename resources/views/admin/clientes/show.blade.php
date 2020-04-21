@@ -181,7 +181,7 @@
                                 {!! Form::model($cliente, ['route' => ['admin.clientes.update', $cliente->id], 'method' => 'PUT']) !!}
     
                                     {{-- Cabecera --}}
-                                    <h5 class="text-secondary">INFORMACIÓN DEL CLIENTE</h5>
+                                    <h6 class="text-secondary">INFORMACIÓN DEL CLIENTE</h6>
 
                                     <hr>
                                     
@@ -204,12 +204,11 @@
                     <div class="tab-pane fade" id="boleta" role="tabpanel" aria-labelledby="boleta-tab">
                         
                         <div class="card shadow">
-                    
                             <div class="card-body">
                                 {!! Form::open(['route' => 'admin.boletas.store', 'autocomplete'=> 'off']) !!}
-                                    <h5 class="text-secondary">
+                                    <h6 class="text-secondary">
                                         CREAR NUEVA BOLETA
-                                    </h5>
+                                    </h6>
                                     <hr>
         
                                     @include('admin.clientes.partials.form-boleta')

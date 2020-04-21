@@ -38,4 +38,10 @@ class Asesor extends Authenticatable
     {
         $this->notify(new AsesorResetPassword($token));
     }
+
+    //relación uno a muchos
+    public function asesorias()
+    {
+        return $this->hasMany('App\Asesoria');
+    }
 }

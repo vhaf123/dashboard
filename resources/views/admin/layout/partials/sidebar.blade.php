@@ -122,8 +122,8 @@
         </li>
 
         {{-- Asesorias --}}
-        <li class="nav-item has-treeview {{setOpen('asesorias.*')}}">
-          <a href="#" class="nav-link {{setActive('asesorias.*')}}">
+        <li class="nav-item has-treeview {{setOpen('admin.asesorias.*')}}">
+          <a href="#" class="nav-link {{setActive('admin.asesorias.*')}}">
             <i class="nav-icon fas fa-chalkboard-teacher"></i>
             <p>
               Asesorías
@@ -132,16 +132,23 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="#" class="nav-link {{setActive('asesorias.pendientes')}}">
+              <a href="{{route('admin.asesorias.pendientes')}}" class="nav-link {{setActive('admin.asesorias.pendientes')}}">
                 <i class="nav-icon far fa-circle text-info"></i>
-                <p>Asesorías Pendientes</p>
+                <p>Paquetes Pendientes</p>
               </a>
             </li>
           
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="{{route('admin.asesorias.nuevoPaquete')}}" class="nav-link {{setActive('admin.asesorias.nuevoPaquete')}}">
                 <i class="nav-icon far fa-circle text-warning"></i>
-                <p>Asignar Asesoría</p>
+                <p>Nuevo Paquete</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon far fa-circle text-secondary"></i>
+                <p>Nueva Asesoría </p>
               </a>
             </li>
 

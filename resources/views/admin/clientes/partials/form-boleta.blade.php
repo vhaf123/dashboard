@@ -50,7 +50,7 @@
     
 {{-- Cabecera --}}
 <br>
-<h5 class="text-secondary">INFORMACIÓN DE CONTRATO</h5>
+<h6 class="text-secondary">INFORMACIÓN DE CONTRATO</h6>
 <hr>
 
 <div class="form-row">

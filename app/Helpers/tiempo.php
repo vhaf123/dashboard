@@ -72,3 +72,77 @@
         return Carbon::createFromTime($launch[0], $launch[1], 0, 'GMT');
 
     }
+
+    /* Calcula el primer y último día del paquete */
+    function primerDia($dias, $inicio, $culminacion){
+
+        $dias = explode(", ", $dias);
+        $respuesta = carbon::parse($culminacion);
+
+        foreach($dias as $dia){
+            $dia = diasIngles($dia);
+            $fecha = carbon::parse($inicio)->subDay()->modify("next $dia");
+
+            if(strtotime($fecha) < strtotime($respuesta)){
+                $respuesta = $fecha;
+            }
+        }
+
+        return $respuesta;
+        
+    }
+
+    function ultimoDia($dias, $inicio, $culminacion){
+        
+        $dias = explode(", ", $dias);
+        $respuesta = carbon::parse($inicio);
+
+        foreach ($dias as $dia) {
+            $dia = diasIngles($dia);
+            $fecha = carbon::parse($culminacion)->addDay()->modify("last $dia");
+
+            if(strtotime($fecha) > strtotime($respuesta)){
+                $respuesta = $fecha;
+            }
+        }
+
+        return $respuesta;
+    }
+
+    function diasIngles($dia){
+        
+        switch ($dia) {
+            case 'lun':
+                $dia = 'monday';
+                break;
+
+            case 'mar':
+                $dia = 'tuesday';
+                break;
+            
+            case 'mier':
+                $dia = 'wednesday';
+                break;
+
+            case 'jue':
+                $dia = 'thursday';
+                break;
+
+            case 'vier':
+                $dia = 'friday';
+                
+                break;
+
+            case 'sab':
+                $dia = 'saturday';
+                break;
+
+            case 'dom':
+                $dia = 'sunday';
+                break;
+        }
+
+        return $dia;
+    }
+
+    

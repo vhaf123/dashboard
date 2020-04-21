@@ -336,6 +336,7 @@
 
         /* Enviar por ajax */
             $('#formularioaenviar').submit(function (ev) {
+               
                 $.ajax({
                     type: $('#formularioaenviar').attr('method'), 
                     url: $('#formularioaenviar').attr('action'),
@@ -350,6 +351,7 @@
                         $('#boleta_cursos').html(datos);
                     } 
                 });
+
                 ev.preventDefault();
             });
 
