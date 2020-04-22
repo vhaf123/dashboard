@@ -1,14 +1,17 @@
 @extends('admin.layout.app')
 
-@section('title', 'Nuevo Paquete')
+@section('title', 'Nueva Asesoría')
 
 @section('link')
     <!-- Select2 -->
     <link rel="stylesheet" href="{{asset('plugins/select2/css/select2.min.css')}}">
     <link rel="stylesheet" href="{{asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
 
-    {{-- daterangepicker --}}
-    <link rel="stylesheet" href="{{asset('plugins/daterangepicker/daterangepicker.css')}}">
+    <!-- Bootstrap4 Duallistbox -->
+    <link rel="stylesheet" href="{{asset('plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css')}}">
+
+    {{-- Jquery UI --}}
+    <link rel="stylesheet" href="{{asset('plugins/jquery-ui/jquery-ui.min.css')}}">
 
     <!-- Tempusdominus Bbootstrap 4 -->
     <link rel="stylesheet" href="{{asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
@@ -42,28 +45,21 @@
                 <div class="card card-outline card-info shadow">
 
                     <div class="card-header">
-                        <h1 class="card-title text-secondary">CREAR NUEVO PAQUETE</h1>
+                        <h1 class="card-title text-secondary">CREAR NUEVA ASESORÍA</h1>
                     </div>
 
                     <div class="card-body">
-                        {!! Form::open(['route' => 'admin.asesorias.storePaquete', 'autocomplete'=> 'off']) !!}
+                        {!! Form::open(['route' => 'admin.asesorias.storeAsesoria', 'autocomplete'=> 'off']) !!}
                             
                             
                             <div class="form-row">
 
                                 {{-- Boleta --}}
-                                <div class="form-group col-2">
+                                <div class="form-group col-md-2">
 
                                     {!! Form::label('boleta_id', 'Boleta') !!}
-                                   {{--  {!! Form::text('boleta_id', null, ['class' => 'form-control' . ( $errors->has('boleta_id') ? ' is-invalid' : '' ), 'autofocus']) !!} --}}
                                     {!! Form::select('boleta_id', $boletas, null, ['class' => 'form-control select2']) !!}
-
-                                    @error('boleta_id')
-                                        <span class="invalid-feedback" role="alert">
-                                            {{ $message }}
-                                        </span>
-                                    @enderror
-
+                                   
                                 </div>
 
                                 {{-- Hora de inicio --}}
@@ -100,44 +96,40 @@
                                     <small class="text-danger error" role="alert" id="mensajeFinal">
                                         *La hora ingresada no es valida
                                     </small>
-
                                 </div>
 
-                                {{-- Dias --}}
-                                <div class="form-group col-7">
-                                    {!! Form::label('dias', 'Dias') !!}
-                                    {!! Form::select('dias[]', $dias, null, [
-                                        "class" => "form-control select2",
-                                        "multiple" => "multiple", 
-                                        "data-placeholder" =>"Ingrese uno o más días",
-                                        "id" => "dias"
-                                    ]) !!}
-
-                                    @error('dias')
-                                    <small class="text-danger" role="alert">
-                                        {{ $message }}
-                                    </small>
-                                    @enderror
+                                {{-- Curso --}}
+                                <div class="form-group col-md-7">
+                                    {!! Form::label("curso_id", "Cursos") !!}
+                                    {!! Form::select("curso_id", $cursos, null, ["class" => "form-control select2"]) !!}
                                 </div>
 
                                 {{-- Fechas --}}
-                                <div class="form-group col-5">
+                                <div class="form-group col-md-5">
                                     {!! Form::label("fecha", "Fecha", ["class"=>"text-secondary"]) !!}
-                                    {!! Form::text("fecha", null, ["class" => "form-control" . ( $errors->has('fecha') ? ' is-invalid' : '' )]) !!} 
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
+                                        </div>
+                                        {!! Form::text("fecha", null, ["class" => "form-control datepicker" . ( $errors->has('fecha') ? ' is-invalid' : '' )]) !!} 
+                                    </div>
+
+                                    @error('fecha')
+                                        <small class="text-danger" role="alert">
+                                            {{ $message }}
+                                        </small>
+                                    @enderror
+
                                 </div>
 
                                {{-- Asesor --}}
-                                <div class="form-group col-7">
+                                <div class="form-group col-md-12">
                                     {!! Form::label("asesor_id", "Asesor") !!}
                                     {{-- <select class="form-control" id="mySelect2"></select> --}}
                                     {!! Form::select("asesor_id", $asesores, null, ["class" => "form-control select2"]) !!}
                                 </div>
 
-                                {{-- Curso --}}
-                                <div class="form-group col-5">
-                                    {!! Form::label("curso_id", "Cursos") !!}
-                                    {!! Form::select("curso_id", $cursos, null, ["class" => "form-control select2"]) !!}
-                                </div>
+                                
 
                                 
                             </div>
@@ -162,9 +154,12 @@
     <!-- Select2 -->
     <script src="{{asset('plugins/select2/js/select2.full.min.js')}}"></script>
 
-    {{-- daterangepicker --}}
-    <script src="{{asset('plugins/daterangepicker/moment.min.js')}}"></script>
-    <script src="{{asset('plugins/daterangepicker/daterangepicker.js')}}"></script>
+    <!-- Bootstrap4 Duallistbox -->
+    <script src="{{asset('plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js')}}"></script>
+
+    {{-- Jquery UI --}}
+    <script src="{{asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
+    {{-- <script src="{{asset('plugins/daterangepicker/daterangepicker.js')}}"></script> --}}
 
     <!-- Tempusdominus Bootstrap 4 -->
     <script src="{{asset('plugins/tempusdominus-bootstrap-4/js/moment.min.js')}}"></script>
@@ -184,18 +179,37 @@
             }
         });
 
+        /* $('.select2bs4').select2({
+            theme: 'bootstrap4'
+        }) */
+
        
-         /* daterangepicker */
-         $("#fecha").daterangepicker({
-            "locale": {
-                "format": "DD/MM/YYYY",
-                "applyLabel": "Aplicar",
-                "cancelLabel": "Cancelar",
-                "daysOfWeek": ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
-                "monthNames": ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", 
-                "Agosto", "Setiembre", "Octumbre", "Noviembre", "Diciembre"],
-            }
+         /* date picker */
+         $.datepicker.regional['es'] = {
+            closeText: 'Cerrar',
+            prevText: '< Ant',
+            nextText: 'Sig >',
+            currentText: 'Hoy',
+            monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+            dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+            dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+            weekHeader: 'Sm',
+            dateFormat: 'dd/mm/yy',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: ''
+            };
+            $.datepicker.setDefaults($.datepicker.regional['es']);
+            $(function () {
+            $("#fecha").datepicker();
         });
+
+
+        $( ".datepicker" ).datepicker();
+
 
         /* Tempusdominus Bootstrap 4 */
 

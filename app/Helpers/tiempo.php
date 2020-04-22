@@ -73,6 +73,19 @@
 
     }
 
+    function duracion($tiempo){
+
+        $hor = intval($tiempo/60);
+        $min = $tiempo%60;
+
+        if($min == 0){
+            return $hor . " horas";
+        }else{
+            return $hor . " h " . $min . " m";
+        }
+
+    }
+
     /* Calcula el primer y último día del paquete */
     function primerDia($dias, $inicio, $culminacion){
 

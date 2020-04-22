@@ -146,7 +146,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="#" class="nav-link">
+              <a href="{{route('admin.asesorias.nuevaAsesoria')}}" class="nav-link {{setActive('admin.asesorias.nuevaAsesoria')}}">
                 <i class="nav-icon far fa-circle text-secondary"></i>
                 <p>Nueva Asesoría </p>
               </a>

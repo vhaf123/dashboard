@@ -45,16 +45,14 @@ class AsesoriaController extends Controller
             $diasDiferencia = carbon::parse($culminacion)->diffInDays(carbon::parse($inicio));
             
 
-            for ($i=0; $i < $diasDiferencia ; $i = $i + 7){
+            for ($i=0; $i <= $diasDiferencia ; $i = $i + 7){
                 if($i != 0){
                     $fecha->addDay(7);
                 }
 
                 if(carbon::parse($culminacion) >= $fecha){
-
                     $datos['fecha'] = carbon::parse($fecha);
                     Asesoria::create($datos);
-
                 }
             }
 
@@ -62,8 +60,6 @@ class AsesoriaController extends Controller
 
         $contratado->generado = 1;
         $contratado->save();
-
-        /* return back()->with('info', 'Asesorias generadas con éxito'); */
        
     }
 
@@ -77,7 +73,78 @@ class AsesoriaController extends Controller
         $asesores = DB::table('asesors')->orderBy('name', 'ASC')->pluck('name', 'id');
         $cursos = DB::table('cursos')->pluck('name', 'id');
         $dias = DB::table('dias')->pluck('name', 'val');
+        $boletas = DB::table('boletas')->orderBy('id', 'ASC')->pluck('id', 'id');
 
-        return view('admin.asesorias.nuevoPaquete', compact('asesores', 'cursos', 'dias'));
+        return view('admin.asesorias.nuevoPaquete', compact('asesores', 'cursos', 'dias', 'boletas'));
+    }
+
+    public function storePaquete(Request $request){
+
+        $request->validate([
+            'boleta_id' => 'required',
+            'dias' => 'required',
+        ]);
+
+        $datos = [
+            'boleta_id' => $request->get('boleta_id'),
+            'asesor_id' => $request->get('asesor_id'),
+            'curso_id' => $request->get('curso_id'),
+            'fecha' => '',
+            'h_inicio' => $request->get('h_inicio'),
+            'h_final' => $request->get('h_final'),
+            'duracion' => (strtotime($request->get('h_final')) - strtotime($request->get('h_inicio')))/60
+        ];
+
+        $inicio_culminacion = explode(' - ', $request->get('fecha'));
+        $inicio = Carbon::createFromFormat( 'd/m/Y', $inicio_culminacion[0], 'GMT');
+        $culminacion = Carbon::createFromFormat( 'd/m/Y', $inicio_culminacion[1], 'GMT');
+
+        foreach($request->get('dias') as $dia){
+            $dia = diasIngles($dia);
+            $fecha = carbon::parse($inicio)->subDay()->modify("next $dia");
+            $diasDiferencia = carbon::parse($culminacion)->diffInDays(carbon::parse($inicio));
+            
+
+            for ($i=0; $i <= $diasDiferencia ; $i = $i + 7){
+                if($i != 0){
+                    $fecha->addDay(7);
+                }
+
+                if(carbon::parse($culminacion) >= $fecha){
+
+                    $datos['fecha'] = carbon::parse($fecha);
+                    Asesoria::create($datos);
+                }
+            }
+        }
+
+        
+        return redirect()->route('admin.asesorias.pendientes')->with('info', 'Nuevo paquete creado con con éxito');
+        
+    }
+
+    public function nuevaAsesoria(){
+        $asesores = DB::table('asesors')->orderBy('name', 'ASC')->pluck('name', 'id');
+        $cursos = DB::table('cursos')->pluck('name', 'id');
+        $dias = DB::table('dias')->pluck('name', 'val');
+        $boletas = DB::table('boletas')->orderBy('id', 'ASC')->pluck('id', 'id');
+
+        return view('admin.asesorias.nuevaAsesoria', compact('asesores', 'cursos', 'dias', 'boletas'));
+    }
+
+    public function storeAsesoria(Request $request){
+        $request->validate([
+            'boleta_id' => 'required',
+            'fecha' => 'required',
+        ]);
+
+        $datos = $request->all();
+
+        $datos['fecha'] = Carbon::createFromFormat( 'd/m/Y', $datos['fecha'], 'GMT');
+        $datos['duracion'] = (strtotime($datos['h_final']) - strtotime($datos['h_inicio']))/60;
+
+        Asesoria::create($datos);
+
+        return redirect()->route('admin.asesorias.pendientes')->with('info', 'Nueva asesoría creada con con éxito');
     }
 }

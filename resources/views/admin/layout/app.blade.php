@@ -26,6 +26,8 @@
     
     <link rel="stylesheet" href="{{asset('css/app2.css')}}">
 
+    
+
 </head>
 {{-- <body class="hold-transition sidebar-mini"> --}}
 <body class="hold-transition sidebar-mini sidebar-collapse layout-fixed layout-navbar-fixed">

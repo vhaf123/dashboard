@@ -58,6 +58,9 @@ Route::group(['prefix' => 'admin',  'middleware' => 'admin'], function(){
   Route::post('asignar/paquete', 'Admin\AsesoriaController@asignarPaquete')->name('admin.asignar.paquete');
   Route::delete('eliminar/paquete/{contratado}', 'Admin\AsesoriaController@eliminarPaquete')->name('admin.eliminar.paquete');
   Route::get('nuevo/paquete', 'Admin\AsesoriaController@nuevoPaquete')->name('admin.asesorias.nuevoPaquete');
+  Route::post('nuevo/paquete', 'Admin\AsesoriaController@storePaquete')->name('admin.asesorias.storePaquete');
+  Route::get('nueva/asesoria', 'Admin\AsesoriaController@nuevaAsesoria')->name('admin.asesorias.nuevaAsesoria');
+  Route::post('nueva/asesoria', 'Admin\AsesoriaController@storeAsesoria')->name('admin.asesorias.storeAsesoria');
 
 });
 

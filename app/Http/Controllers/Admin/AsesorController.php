@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 use App\Models\Asesor;
+use App\Asesoria;
 
 class AsesorController extends Controller
 {
@@ -55,9 +57,26 @@ class AsesorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Asesor $asesor)
+    public function show(Request $request, Asesor $asesor)
     {
-        return view('admin.asesores.show', compact('asesor'));
+        $desde = Carbon::createFromFormat( 'd/m/Y', '01/05/2020', 'GMT');
+        $hasta = Carbon::createFromFormat( 'd/m/Y', '08/05/2020', 'GMT');
+
+        $name = $asesor->name;
+        $id = $asesor->id;
+
+        $asesorias = Asesoria::where('asesor_id', $asesor->id)
+                            /* ->whereDate('fecha', '>=', $desde)
+                            ->whereDate('fecha', '<=', $hasta) */
+                            ->orderBy('fecha', 'ASC')
+                            ->get();
+
+        /* $asesorias = Asesoria::orderBy('fecha', 'ASC')
+                        ->where('asesor_id', $asesor)
+                        ->whereDate('fecha', $fecha)
+                        ->paginate(10); */
+        
+        return view('admin.asesores.show', compact('asesorias', 'name', 'id'));
     }
 
     /**
