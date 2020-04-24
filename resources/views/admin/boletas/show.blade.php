@@ -265,7 +265,7 @@
         /* Tempusdominus Bootstrap 4 */
 
             $('#inicio').datetimepicker({
-                    format: 'hh:mm a'
+                format: 'hh:mm a'
             });
 
             $('#final').datetimepicker({

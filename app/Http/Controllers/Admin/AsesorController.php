@@ -47,7 +47,7 @@ class AsesorController extends Controller
 
         Asesor::create($request->all());
 
-        return redirect()->route('asesores.index')
+        return redirect()->route('admin.asesores.index')
                 ->with('info', 'Nuevo asesor creado con éxito');
     }
 
@@ -59,24 +59,31 @@ class AsesorController extends Controller
      */
     public function show(Request $request, Asesor $asesor)
     {
-        $desde = Carbon::createFromFormat( 'd/m/Y', '01/05/2020', 'GMT');
-        $hasta = Carbon::createFromFormat( 'd/m/Y', '08/05/2020', 'GMT');
 
-        $name = $asesor->name;
-        $id = $asesor->id;
+        $fechas = $request->get('fechas');
+
+        if($fechas){
+            $fechas = explode(' - ', $request->get('fechas'));
+            $desde = Carbon::createFromFormat( 'd/m/Y', $fechas[0], 'GMT');
+            $hasta = Carbon::createFromFormat( 'd/m/Y', $fechas[1], 'GMT');
+        } else{
+            $desde = null;
+            $hasta = null;
+        }
+
+
+        $datos = [
+            'name' => $asesor->name,
+            'id' => $asesor->id
+        ];
 
         $asesorias = Asesoria::where('asesor_id', $asesor->id)
-                            /* ->whereDate('fecha', '>=', $desde)
-                            ->whereDate('fecha', '<=', $hasta) */
-                            ->orderBy('fecha', 'ASC')
-                            ->get();
-
-        /* $asesorias = Asesoria::orderBy('fecha', 'ASC')
-                        ->where('asesor_id', $asesor)
-                        ->whereDate('fecha', $fecha)
-                        ->paginate(10); */
+                        ->desde($desde)
+                        ->hasta($hasta)
+                        ->get();
+            
+        return view('admin.asesores.show', compact('asesorias', 'datos'));
         
-        return view('admin.asesores.show', compact('asesorias', 'name', 'id'));
     }
 
     /**

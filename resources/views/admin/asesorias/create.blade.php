@@ -5,7 +5,6 @@
 @section('link')
     <!-- Select2 -->
     <link rel="stylesheet" href="{{asset('plugins/select2/css/select2.min.css')}}">
-    <link rel="stylesheet" href="{{asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
 
     <!-- Bootstrap4 Duallistbox -->
     <link rel="stylesheet" href="{{asset('plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css')}}">
@@ -24,32 +23,20 @@
 
 @endsection
 
-@section('breadcrumbs')
-    <div class="row mb-2">
-        <div class="col-sm-6">
-           
-        </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="{{route('admin.home')}}">Admin</a></li>
-            <li class="breadcrumb-item active">Legacy User Menu</li>
-            </ol>
-        </div>
-    </div>
-@endsection
+
 
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card card-outline card-info shadow">
+                <div class="card card-light shadow">
 
                     <div class="card-header">
                         <h1 class="card-title text-secondary">CREAR NUEVA ASESORÍA</h1>
                     </div>
 
                     <div class="card-body">
-                        {!! Form::open(['route' => 'admin.asesorias.storeAsesoria', 'autocomplete'=> 'off']) !!}
+                        {!! Form::open(['route' => 'admin.asesorias.store', 'autocomplete'=> 'off']) !!}
                             
                             
                             <div class="form-row">
@@ -68,7 +55,6 @@
                                     {!! Form::label('h_inicio', 'Inicio') !!}
 
                                     <div class="input-group date" id="inicio" data-target-input="nearest">
-
                                         {!! Form::text("h_inicio", "12:00 pm", ["class" => "form-control datetimepicker-input" . ( $errors->has('h_inicio') ? ' is-invalid' : '' ), "data-target" => "#inicio"]) !!}
 
                                         <div class="input-group-append" data-target="#inicio" data-toggle="datetimepicker">
@@ -153,10 +139,7 @@
 @section('script')
     <!-- Select2 -->
     <script src="{{asset('plugins/select2/js/select2.full.min.js')}}"></script>
-
-    <!-- Bootstrap4 Duallistbox -->
-    <script src="{{asset('plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js')}}"></script>
-
+    
     {{-- Jquery UI --}}
     <script src="{{asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
     {{-- <script src="{{asset('plugins/daterangepicker/daterangepicker.js')}}"></script> --}}

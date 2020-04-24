@@ -27,12 +27,12 @@
         <div class="row justify-content-center">
             <div class="col-md-9">
 
-                <div class="card card-outline card-info shadow">
+                <div class="card shadow">
 
                     {{-- Cabecera --}}
                     <div class="card-header">
-                        <h3 class="card-title mt-2">Boletas</h3>    
-                        <a href="{{route('admin.boletas.create')}}" class="btn btn-outline-info float-right">Agregar</a>
+                        <h3 class="card-title text-secondary mt-2">LISTA DE BOLETAS</h3>    
+                        <a href="{{route('admin.boletas.create')}}" class="btn btn-outline-info float-right">Nueva boleta</a>
                     </div>
 
                     {{-- Cuerpo --}}
@@ -71,7 +71,9 @@
             "responsive": true,
             "autoWidth": false,
             "serverSide": true,
-            "ajax": "{{url('api/boletas')}}",
+            "ajax": {
+                "url" : "{{url('api/boletas')}}"
+            },
             "columns": [
                 { "data": 'id'},
                 { "data": 'cliente'},

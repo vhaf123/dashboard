@@ -32,12 +32,12 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
 
-            <div class="card card-outline card-info shadow">
+            <div class="card shadow">
 
                 {{-- Cabecera --}}
                 <div class="card-header">
-                    <h3 class="card-title mt-2">Paquetes Pendientes</h3>    
-                    <a href="{{route('admin.asesorias.nuevoPaquete')}}" class="btn btn-outline-info float-right">Agregar</a>
+                    <h3 class="card-title mt-2 text-secondary">PAQUETES PENDIENTES</h3>    
+                    <a href="{{route('admin.paquetes.create')}}" class="btn btn-outline-info float-right">Nuevo paquete</a>
                 </div>
 
                 {{-- Cuerpo --}}
@@ -111,7 +111,7 @@
             "responsive": true,
             "autoWidth": false,
             "serverSide": true,
-            "ajax": "{{url('api/asesorias/pendientes')}}",
+            "ajax": "{{url('api/paquetes/pendientes')}}",
             "columns": [
                 /* { "data": 'id'}, */
                 { "data": 'boleta'},
@@ -179,12 +179,10 @@
 
         $('#formularioaenviar').submit(function (ev) {
 
-            /* Cerrar el modal */
             $("#exampleModalCenter").modal('hide');
             $('body').removeClass('modal-open');
             $('.modal-backdrop').remove();
 
-            /* Enviar por ajax */
             $.ajax({
                 type: $('#formularioaenviar').attr('method'), 
                 url: $('#formularioaenviar').attr('action'),
@@ -204,9 +202,11 @@
 
             ev.preventDefault();
         });
-
+ 
         
         function AlertaAnular(direccion){
+
+           
 
             Swal.fire({
                 title: '¿Estas seguro de querer eliminar este paquete?',
@@ -226,7 +226,7 @@
                         },
                         type: 'POST',
                         success: function(data){
-                           
+
                             $('#pendientes').dataTable()._fnAjaxUpdate();
                             
                             Swal.fire(
@@ -241,8 +241,6 @@
                 }
             })
         }
-
-        
 
     </script>
 

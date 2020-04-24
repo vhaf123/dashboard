@@ -21,38 +21,30 @@
 
 @endsection
 
-@section('breadcrumbs')
-    <div class="row mb-2">
-        <div class="col-sm-6">
-           
-        </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="{{route('admin.home')}}">Admin</a></li>
-            <li class="breadcrumb-item active">Legacy User Menu</li>
-            </ol>
-        </div>
-    </div>
-@endsection
+
 
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card card-outline card-info shadow">
+                <div class="card shadow">
 
-                    <div class="card-header">
+                    {{-- <div class="card-header">
                         <h1 class="card-title text-secondary">CREAR NUEVO PAQUETE</h1>
-                    </div>
+                    </div> --}}
 
                     <div class="card-body">
-                        {!! Form::open(['route' => 'admin.asesorias.storePaquete', 'autocomplete'=> 'off']) !!}
+                        {!! Form::open(['route' => 'admin.paquetes.store', 'autocomplete'=> 'off']) !!}
                             
-                            
+                        <h6 class="text-secondary">
+                            CREAR UN NUEVO PAQUETE
+                        </h6>
+                        <hr>
+
                             <div class="form-row">
 
                                 {{-- Boleta --}}
-                                <div class="form-group col-2">
+                                <div class="form-group col-md-2">
 
                                     {!! Form::label('boleta_id', 'Boleta') !!}
                                    {{--  {!! Form::text('boleta_id', null, ['class' => 'form-control' . ( $errors->has('boleta_id') ? ' is-invalid' : '' ), 'autofocus']) !!} --}}
@@ -107,7 +99,7 @@
                                 <div class="form-group col-7">
                                     {!! Form::label('dias', 'Dias') !!}
                                     {!! Form::select('dias[]', $dias, null, [
-                                        "class" => "form-control select2",
+                                        "class" => "form-control select2 ". ( $errors->has('dias') ? ' is-invalid' : '' ),
                                         "multiple" => "multiple", 
                                         "data-placeholder" =>"Ingrese uno o más días",
                                         "id" => "dias"
@@ -173,7 +165,7 @@
     <script>
         /* Select2 */
         $('.select2').select2({  
-                
+            theme: 'bootstrap4',
             language: {
                 noResults: function() {
                     return "No hay resultado";        

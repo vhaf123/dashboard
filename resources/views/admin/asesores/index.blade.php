@@ -13,11 +13,11 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
 
-                <div class="card card-outline card-info shadow">
+                <div class="card shadow">
 
                     <div class="card-header">
-                        <h3 class="card-title mt-2">Lista de Asesores</h3>    
-                        <a href="{{route('admin.asesores.create')}}" class="btn btn-outline-info float-right">Agregar</a>
+                        <h3 class="card-title text-secondary mt-2">LISTA DE ASESORES</h3>    
+                        <a href="{{route('admin.asesores.create')}}" class="btn btn-outline-info float-right">Nuevo asesor</a>
                     </div>
 
                     <div class="card-body">

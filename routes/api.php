@@ -2,9 +2,11 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Carbon\Carbon;
 
 use Illuminate\Support\Facades\DB;
 use App\Models\Asesor;
+use App\Asesoria;
 
 
 /*
@@ -62,7 +64,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
     Route::get('boletas', function () {
 
-        $boletas = App\Boleta::select("id", "cliente_id", "admin_id", "categoria_id", "estado")->orderBy('id', 'DESC')->get();
+        $boletas = App\Boleta::select("id", "cliente_id", "admin_id", "categoria_id", "estado")
+                                ->orderBy('id', 'DESC')
+                                ->get();
 
         if(count($boletas) == 0){
             return datatables()
@@ -90,7 +94,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
         }
     });
 
-    Route::get('asesorias/pendientes', function () {
+    Route::get('paquetes/pendientes', function () {
 
         $contratados = App\Contratado::where('generado', 0)->orderBy('id', 'DESC')->get();
 
@@ -120,7 +124,55 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
             return datatables()
                 ->of($datos)
-                ->addColumn('btn', 'admin/asesorias/partials/actions')
+                ->addColumn('btn', 'admin/paquetes/partials/actions')
+                ->rawColumns(['btn'])
+                ->toJson();
+        }
+
+    });
+
+    Route::get('admin/asesores/{id}', function (Request $request, $id) {
+
+        $fechas = $request->get('fechas');
+
+        if($fechas){
+            $fechas = explode(' - ', $request->get('fechas'));
+            $desde = Carbon::createFromFormat( 'd/m/Y', $fechas[0], 'GMT');
+            $hasta = Carbon::createFromFormat( 'd/m/Y', $fechas[1], 'GMT');
+        } else{
+            $desde = null;
+            $hasta = null;
+        }
+
+        $asesorias = Asesoria::where('asesor_id', $id)
+                            ->desde($desde)
+                            ->hasta($hasta)
+                            ->orderBy('fecha', 'ASC')
+                            ->get();
+
+        if(count($asesorias) == 0){
+            return datatables()
+                ->of($asesorias)
+                ->toJson();
+        } else{
+            foreach($asesorias as $asesoria){
+                $dato = [
+                    'asesoria' => $asesoria->id,
+                    'admin' => $asesoria->boleta->admin_id,
+                    'boleta' => $asesoria->boleta_id,
+                    'cliente' => $asesoria->boleta->cliente->name,
+                    'categoria' => $asesoria->boleta->categoria->name,
+                    'fecha' => $asesoria->fecha->format('d/m/Y'),
+                    'horario' => horario($asesoria->h_inicio, $asesoria->h_final),
+                    'duracion' => duracion($asesoria->duracion)
+                ];
+
+                $datos[] = $dato;
+            }
+
+            return datatables()
+                ->of($datos)
+                ->addColumn('btn', 'admin/asesores/partials/actions2')
                 ->rawColumns(['btn'])
                 ->toJson();
         }

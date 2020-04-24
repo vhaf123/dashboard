@@ -59,3 +59,39 @@
         return $array;
 
     }
+
+    function diasIngles($dia){
+        
+        switch ($dia) {
+            case 'lun':
+                $dia = 'monday';
+                break;
+
+            case 'mar':
+                $dia = 'tuesday';
+                break;
+            
+            case 'mier':
+                $dia = 'wednesday';
+                break;
+
+            case 'jue':
+                $dia = 'thursday';
+                break;
+
+            case 'vier':
+                $dia = 'friday';
+                
+                break;
+
+            case 'sab':
+                $dia = 'saturday';
+                break;
+
+            case 'dom':
+                $dia = 'sunday';
+                break;
+        }
+
+        return $dia;
+    }

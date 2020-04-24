@@ -121,39 +121,59 @@
           </ul>
         </li>
 
-        {{-- Asesorias --}}
-        <li class="nav-item has-treeview {{setOpen('admin.asesorias.*')}}">
-          <a href="#" class="nav-link {{setActive('admin.asesorias.*')}}">
+        {{-- Paquetes --}}
+        <li class="nav-item has-treeview {{setOpen('admin.paquetes.*')}}">
+          <a href="#" class="nav-link {{setActive('admin.paquetes.*')}}">
             <i class="nav-icon fas fa-chalkboard-teacher"></i>
             <p>
-              Asesorías
+              Paquetes
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{route('admin.asesorias.pendientes')}}" class="nav-link {{setActive('admin.asesorias.pendientes')}}">
+              <a href="{{route('admin.paquetes.index')}}" class="nav-link {{setActive('admin.paquetes.index')}}">
                 <i class="nav-icon far fa-circle text-info"></i>
                 <p>Paquetes Pendientes</p>
               </a>
             </li>
           
             <li class="nav-item">
-              <a href="{{route('admin.asesorias.nuevoPaquete')}}" class="nav-link {{setActive('admin.asesorias.nuevoPaquete')}}">
+              <a href="{{route('admin.paquetes.create')}}" class="nav-link {{setActive('admin.paquetes.create')}}">
                 <i class="nav-icon far fa-circle text-warning"></i>
-                <p>Nuevo Paquete</p>
+                <p>Crear Nuevo Paquete</p>
               </a>
             </li>
-
-            <li class="nav-item">
-              <a href="{{route('admin.asesorias.nuevaAsesoria')}}" class="nav-link {{setActive('admin.asesorias.nuevaAsesoria')}}">
-                <i class="nav-icon far fa-circle text-secondary"></i>
-                <p>Nueva Asesoría </p>
-              </a>
-            </li>
-
           </ul>
         </li>
+
+        {{-- Asesorias --}}
+        <li class="nav-item has-treeview {{setOpen('admin.asesorias.*')}}">
+          <a href="#" class="nav-link {{setActive('admin.asesorias.*')}}">
+            <i class="nav-icon fas fa-chalkboard"></i>
+            <p>
+              Asesorias
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{{route('admin.asesorias.create')}}" class="nav-link {{setActive('admin.asesorias.create')}}">
+                <i class="nav-icon far fa-circle text-info"></i>
+                <p>Crear nueva asesoría</p>
+              </a>
+            </li>
+          
+            <li class="nav-item">
+              <a href="#" class="nav-link {{setActive('#')}}">
+                <i class="nav-icon far fa-circle text-warning"></i>
+                <p>Eliminar Asesorías</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+       
 
 
 

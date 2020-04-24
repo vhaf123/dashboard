@@ -49,30 +49,7 @@
         return $inicio . " - " . $final;
     }
 
-    /* Formato hora para guardarlo en la base de datos */
-    function formatearHora ($string) {
-        
-        $delimiters = array(":", " ");
-
-        $ready = str_replace($delimiters, $delimiters[0], $string);
-        $launch = explode($delimiters[0], $ready);
-        
-        if($launch[2] == "am"){
-            if($launch[0] == "12"){
-                $launch[0] = 0;
-            }
-        }
-
-        if($launch[2] == "pm"){
-            if($launch[0] != "12"){
-                $launch[0] = $launch[0] + 12;
-            }
-        }
-
-        return Carbon::createFromTime($launch[0], $launch[1], 0, 'GMT');
-
-    }
-
+ 
     function duracion($tiempo){
 
         $hor = intval($tiempo/60);
@@ -120,42 +97,4 @@
         }
 
         return $respuesta;
-    }
-
-    function diasIngles($dia){
-        
-        switch ($dia) {
-            case 'lun':
-                $dia = 'monday';
-                break;
-
-            case 'mar':
-                $dia = 'tuesday';
-                break;
-            
-            case 'mier':
-                $dia = 'wednesday';
-                break;
-
-            case 'jue':
-                $dia = 'thursday';
-                break;
-
-            case 'vier':
-                $dia = 'friday';
-                
-                break;
-
-            case 'sab':
-                $dia = 'saturday';
-                break;
-
-            case 'dom':
-                $dia = 'sunday';
-                break;
-        }
-
-        return $dia;
-    }
-
-    
+    }    

@@ -141,13 +141,11 @@ class BoletaController extends Controller
     {
 
         $datos = $request->all();
-
-        //formatear hora
-        $datos['h_inicio'] = formatearHora($datos['h_inicio']);
-        $datos['h_final'] = formatearHora($datos['h_final']);
         $datos['dias'] = implode( ", " ,$datos['dias']);
-               
-        Contratado::create($datos);
+
+        /* return $datos; */
+        Contratado::create($datos);       
+        
         
         return view('admin.boletas.partials.mostrarCursos', compact('boleta'));
     }

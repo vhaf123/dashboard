@@ -32,6 +32,7 @@ class CreateContratadosTable extends Migration
                 ->onDelete('cascade');
 
             $table->string('dias', 100);
+
             $table->dateTime('h_inicio');
             $table->dateTime('h_final');
 

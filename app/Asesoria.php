@@ -26,4 +26,22 @@ class Asesoria extends Model
     {
         return $this->belongsTo('App\Curso');
     }
+
+
+
+
+    /* Query Scopes */
+
+    public function scopeDesde($query, $desde){
+        if($desde){
+            return $query->whereDate('fecha', '>=', $desde);
+        }
+    }
+
+    public function scopeHasta($query, $hasta){
+        if($hasta){
+            return $query->whereDate('fecha', '<=', $hasta);
+        }
+    }
+
 }

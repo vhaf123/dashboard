@@ -8,31 +8,18 @@
     <link rel="stylesheet" href="{{asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
 @endsection
 
-@section('breadcrumbs')
-    <div class="row mb-2">
-        <div class="col-sm-6">
-            
-        </div>
-        <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="{{route('admin.home')}}">Admin</a></li>
-            {{-- <li class="breadcrumb-item"><a href="{{route('admin.clientes.index')}}">Clientes</a></li> --}}
-            <li class="breadcrumb-item active">Clientes</li>
-            </ol>
-        </div>
-    </div>
-@endsection
+
 
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-10">
+            <div class="col-9">
 
-                <div class="card card-outline card-info shadow">
+                <div class="card shadow">
 
                     <div class="card-header">
-                        <h3 class="card-title mt-2">Lista de Clientes</h3>    
-                        <a href="{{route('admin.clientes.create')}}" class="btn btn-outline-info float-right">Agregar</a>
+                        <h3 class="card-title text-secondary mt-2">LISTA TOTAL DE CLIENTES</h3>    
+                        <a href="{{route('admin.clientes.create')}}" class="btn btn-outline-info float-right">Nuevo cliente</a>
                         
                     </div>
 

@@ -15,7 +15,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card card-outline card-info shadow">
+                <div class="card shadow">
                     
                     <div class="card-body">
                         {!! Form::open(['route' => 'admin.boletas.store', 'autocomplete'=> 'off']) !!}

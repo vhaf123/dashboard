@@ -16,7 +16,7 @@
         <div class="row justify-content-center">
             <div class="col-md-9 col-lg-7">
 
-                <div class="card card-outline card-info shadow">
+                <div class="card shadow">
 
                     <div class="card-body">
                         
@@ -25,7 +25,7 @@
 
                             {{-- Cabecera --}}
                             <h6 class="text-secondary">
-                                CREAR UN NUEVO CLIENTE
+                                AGREGAR UN NUEVO CLIENTE
                             </h6>
                             
                             <hr>

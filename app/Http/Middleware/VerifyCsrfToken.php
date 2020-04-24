@@ -15,6 +15,7 @@ class VerifyCsrfToken extends Middleware
         'admin/clientes/*',
         'admin/asesores/*',
         'admin/boletas/*',
-        'admin/eliminar/paquete/*'
+        'admin/paquetes/*',
+        'admin/asesorias/*'
     ];
 }

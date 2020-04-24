@@ -45,7 +45,7 @@ Route::group(['prefix' => 'admin',  'middleware' => 'admin'], function(){
   Route::resource('clientes', 'Admin\ClienteController')->names('admin.clientes');
   
   /* Asesores */
-  Route::resource('asesores', 'Admin\AsesorController')->names('admin.asesores')->parameters(['asesores' => 'asesor']);;
+  Route::resource('asesores', 'Admin\AsesorController')->names('admin.asesores')->parameters(['asesores' => 'asesor']);
 
   /* Boletas */
   Route::resource('boletas', 'Admin\BoletaController')->names('admin.boletas');
@@ -53,15 +53,17 @@ Route::group(['prefix' => 'admin',  'middleware' => 'admin'], function(){
   Route::delete('borrar/curso/{curso}', 'Admin\BoletaController@borrarCursos')->name('borrar.cursos');
   Route::get('generar/pdf/{boleta}', 'Admin\BoletaController@generarPDF')->name('generar.pdf');
 
-  /* Asesorias */
-  Route::get('asesorias/pendientes', 'Admin\AsesoriaController@pendientes')->name('admin.asesorias.pendientes');
-  Route::post('asignar/paquete', 'Admin\AsesoriaController@asignarPaquete')->name('admin.asignar.paquete');
-  Route::delete('eliminar/paquete/{contratado}', 'Admin\AsesoriaController@eliminarPaquete')->name('admin.eliminar.paquete');
-  Route::get('nuevo/paquete', 'Admin\AsesoriaController@nuevoPaquete')->name('admin.asesorias.nuevoPaquete');
-  Route::post('nuevo/paquete', 'Admin\AsesoriaController@storePaquete')->name('admin.asesorias.storePaquete');
-  Route::get('nueva/asesoria', 'Admin\AsesoriaController@nuevaAsesoria')->name('admin.asesorias.nuevaAsesoria');
-  Route::post('nueva/asesoria', 'Admin\AsesoriaController@storeAsesoria')->name('admin.asesorias.storeAsesoria');
 
+  /* Paquetes */
+  Route::resource('paquetes', 'Admin\PaqueteController')->names('admin.paquetes')->parameters(['paquetes' => 'id']);
+  Route::post('asignar/paquete', 'Admin\PaqueteController@asignarPaquete')->name('admin.asignar.paquete');
+
+
+  /* Asesorias */
+  Route::resource('asesorias', 'Admin\AsesoriaController')->names('admin.asesorias');
+  /* Route::get('nueva/asesoria', 'Admin\AsesoriaController@nuevaAsesoria')->name('admin.asesorias.nuevaAsesoria');
+  Route::post('nueva/asesoria', 'Admin\AsesoriaController@storeAsesoria')->name('admin.asesorias.storeAsesoria');
+  Route::delete('eliminar/asesoria/{asesoria}', 'Admin\AsesoriaController@eliminarAsesoria')->name('admin.eliminar.asesoria'); */
 });
 
 

@@ -5,7 +5,7 @@
     </button>
 
     @php
-        $ruta = route('admin.eliminar.paquete', $id);
+        $ruta = route('admin.paquetes.destroy', $id);
     @endphp
 
     <button class="btn btn-sm btn-danger ml-1" onclick="AlertaAnular('{{$ruta}}')">
