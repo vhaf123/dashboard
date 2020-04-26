@@ -51,7 +51,7 @@
     
 {{-- Cabecera --}}
 <br>
-<h6 class="text-secondary">INFORMACIÓN DEL CONTRATO</h6>
+<h6 class="text-info">INFORMACIÓN DEL CONTRATO</h6>
 <hr>
 
 <div class="form-row">

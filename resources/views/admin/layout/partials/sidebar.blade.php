@@ -59,11 +59,36 @@
         </li>
 
 
-        {{-- Administradores --}}
-        <li class="nav-item">
-          <a href="#" class="nav-link {{setActive('admin.administradores.*')}}">
+        {{-- Coordinadores --}}
+        {{-- <li class="nav-item has-treeview {{setOpen('admin.coordinadores.*')}}">
+          <a href="#" class="nav-link {{setActive('admin.coordinadores.*')}}">
             <i class="nav-icon fas fa-users-cog"></i>
-            <p>Administradores</p>
+            <p>
+              Coordinadores
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{{route('admin.coordinadores.index')}}" class="nav-link {{setActive('admin.coordinadores.index')}}">
+                <i class="nav-icon far fa-circle text-info"></i>
+                <p>Lista de Coordinadores</p>
+              </a>
+            </li>
+           
+            <li class="nav-item">
+              <a href="{{route('admin.coordinadores.create')}}" class="nav-link {{setActive('admin.coordinadores.create')}}">
+                <i class="nav-icon far fa-circle text-warning"></i>
+                <p>Crear Nuevo Coordinador</p>
+              </a>
+            </li>
+
+          </ul>
+        </li> --}}
+        <li class="nav-item">
+          <a href="{{route('admin.coordinadores.index')}}" class="nav-link {{setActive('admin.coordinadores.*')}}">
+            <i class="nav-icon fas fa-users-cog"></i>
+            <p>Coordinadores</p>
           </a>
         </li>
 
@@ -121,6 +146,37 @@
           </ul>
         </li>
 
+
+        {{-- Pagos --}}
+        <li class="nav-item has-treeview {{setOpen('admin.boletas.*')}}">
+          <a href="#" class="nav-link {{setActive('admin.boletas.*')}}">
+            <i class="nav-icon fas fa-credit-card"></i>
+            <p>
+              Pagos
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{{route('admin.boletas.index')}}" class="nav-link {{setActive('admin.boletas.index')}}">
+                <i class="nav-icon far fa-circle text-info"></i>
+                <p>Pagos de clientes</p>
+              </a>
+            </li>
+           
+            <li class="nav-item">
+              <a href="{{route('admin.boletas.create')}}" class="nav-link {{setActive('boletas.create')}}">
+                <i class="nav-icon far fa-circle text-warning"></i>
+                <p>Pagos a asesores</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+
+
+        <li class="nav-header">ASESORÍAS</li>
+
         {{-- Paquetes --}}
         <li class="nav-item has-treeview {{setOpen('admin.paquetes.*')}}">
           <a href="#" class="nav-link {{setActive('admin.paquetes.*')}}">
@@ -152,7 +208,7 @@
           <a href="#" class="nav-link {{setActive('admin.asesorias.*')}}">
             <i class="nav-icon fas fa-chalkboard"></i>
             <p>
-              Asesorias
+              Asesorías
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
@@ -177,18 +233,26 @@
 
 
 
-        <li class="nav-header">TAREAS</li>
+        <li class="nav-header">USUARIO</li>
 
         {{-- Roles de administrador --}}
         <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-user-lock"></i>
-            <p>Roles de Administrador</p>
+          <a href="#" class="nav-link"
+                    onclick="event.preventDefault();
+                      document.getElementById('logout-form').submit();">
+            <i class="nav-icon fas fa-sign-in-alt"></i>
+            <p>Cerrar Sesión</p>
           </a>
+            {{-- <form id="logout-form" action="{{ url('/admin/logout') }}" method="POST" style="display: none;">
+              {{ csrf_field() }} --}}
+          {{-- <a href="{{route('admin.logout')}}" class="nav-link">
+            <i class="nav-icon fas fa-sign-in-alt"></i>
+            <p>Cerrar Sesión</p>
+          </a> --}}
         </li>
 
         {{-- Materiales --}}
-        <li class="nav-item has-treeview">
+        {{-- <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
             <i class="nav-icon fas fa-box-open"></i>
             <p>
@@ -232,7 +296,7 @@
               </a>
             </li>
           </ul>
-        </li>
+        </li> --}}
 
 
       </ul>

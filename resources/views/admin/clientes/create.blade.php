@@ -18,17 +18,17 @@
 
                 <div class="card shadow">
 
+                    <div class="card-header py-3">
+                        {{-- Cabecera --}}
+                        <h1 class="card-title text-secondary">
+                            CREAR NUEVO CLIENTE
+                        </h1>
+                    </div>
+
                     <div class="card-body">
                         
                         {{-- Formulario --}}
                         {!! Form::open(['route' => 'admin.clientes.store', 'autocomplete'=> 'off']) !!}
-
-                            {{-- Cabecera --}}
-                            <h6 class="text-secondary">
-                                AGREGAR UN NUEVO CLIENTE
-                            </h6>
-                            
-                            <hr>
                             
                             @include('admin.clientes.partials.form')
 

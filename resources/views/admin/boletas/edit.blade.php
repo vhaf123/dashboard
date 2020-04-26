@@ -1,6 +1,9 @@
 @extends('admin.layout.app')
 
-@section('title', 'Editarr Boleta')
+@section('title')
+ Boleta {{$boleta->id}}
+@endsection
+
 
 @section('link')
     <!-- Select2 -->
@@ -20,12 +23,8 @@
                     <div class="card-body">
                         {!! Form::model($boleta, ['route' => ['admin.boletas.update', $boleta->id], 'method' => 'PUT']) !!}
 
-                            <h6 class="text-secondary">
-                                <a href="{{route('admin.clientes.create')}}" class="btn btn-sm btn-info float-right">
-                                    <i class="fas fa-user-plus"></i>
-                                    Nuevo Cliente
-                                </a>
-                                EDITAR BOLETA
+                            <h6 class="text-info">
+                                EDITAR LA BOLETA 
                             </h6>
                             <hr>
 
@@ -33,7 +32,7 @@
 
                             <div class="form-group float-right">
                                 <button type="submit" class="btn btn-md btn-primary">
-                                    Registrar
+                                    Actualizar
                                 </button>
                             </div>
 

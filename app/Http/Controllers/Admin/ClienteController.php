@@ -117,12 +117,6 @@ class ClienteController extends Controller
             'admin_id' => \Auth::guard('admin')->user()->id,
             'accion' => 'update_cliente',
         ]);
-
-        /* Timeline::create([
-            'cliente_id' => $cliente->id,
-            'accion' => 'update_cliente',
-            'accion_id' => $cliente->id
-        ]); */
         
 
         return redirect()->route('admin.clientes.show', $cliente)

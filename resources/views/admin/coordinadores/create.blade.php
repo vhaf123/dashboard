@@ -16,10 +16,10 @@
 
                     <div class="card-body">
 
-                        <h6 class="text-secondary">CREAR UN NUEVO ASESOR</h6>
+                        <h6 class="text-secondary">CREAR NUEVO COORDINADOR</h6>
                         <hr>
                         
-                        {!! Form::open(['route' => 'admin.asesores.store', 'autocomplete'=> 'off']) !!}
+                        {!! Form::open(['route' => 'admin.coordinadores.store', 'autocomplete'=> 'off']) !!}
                         
                             @include('admin.asesores.partials.form')
 

@@ -131,7 +131,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
     });
 
-    Route::get('admin/asesores/{id}', function (Request $request, $id) {
+    /* Route::get('admin/asesores/{id}', function (Request $request, $id) {
 
         $fechas = $request->get('fechas');
 
@@ -173,6 +173,26 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
             return datatables()
                 ->of($datos)
                 ->addColumn('btn', 'admin/asesores/partials/actions2')
+                ->rawColumns(['btn'])
+                ->toJson();
+        }
+
+    }); */
+
+    Route::get('coordinadores', function () {
+
+        $admins = App\Models\Admin::select('id', 'name')->get();
+
+        if(count($admins) == 0){
+            
+            return datatables()
+                ->of($admins)
+                ->toJson();
+        }else{
+
+            return datatables()
+                ->of($admins)
+                ->addColumn('btn', 'admin/coordinadores/partials/actions')
                 ->rawColumns(['btn'])
                 ->toJson();
         }

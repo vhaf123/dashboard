@@ -19,12 +19,12 @@
                     
                     <div class="card-body">
                         {!! Form::open(['route' => 'admin.boletas.store', 'autocomplete'=> 'off']) !!}
-                            <h6 class="text-secondary">
+                            <h6 class="text-info">
+                                CREAR UNA NUEVA BOLETA
                                 <a href="{{route('admin.clientes.create')}}" class="btn btn-sm btn-info float-right">
                                     <i class="fas fa-user-plus"></i>
                                     Nuevo Cliente
                                 </a>
-                                CREAR UNA NUEVA BOLETA
                             </h6>
                             <hr>
 

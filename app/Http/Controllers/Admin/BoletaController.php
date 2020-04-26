@@ -118,9 +118,21 @@ class BoletaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Boleta $boleta)
     {
-        //
+        $request->validate([
+            'cliente_id' => 'required',
+            'numero_alumnos' => 'required',
+            'alumno' => 'required',
+            "horas" => 'required',
+            "sesiones" => 'required',
+            'anticipo' => 'required',
+        ]);
+
+        $boleta->fill($request->all())->save();
+
+        return redirect()->route('admin.boletas.show', $boleta)
+                ->with('info', 'La boleta ' . $boleta->id . ' fue actualizada con éxito');
     }
 
     /**

@@ -20,7 +20,6 @@
                     <div class="card-header">
                         <h3 class="card-title text-secondary mt-2">LISTA TOTAL DE CLIENTES</h3>    
                         <a href="{{route('admin.clientes.create')}}" class="btn btn-outline-info float-right">Nuevo cliente</a>
-                        
                     </div>
 
                     <div class="card-body">

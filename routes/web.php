@@ -44,6 +44,10 @@ Route::group(['prefix' => 'admin',  'middleware' => 'admin'], function(){
   /* Clientes */
   Route::resource('clientes', 'Admin\ClienteController')->names('admin.clientes');
   
+
+  /* Clientes */
+  Route::resource('coordinadores', 'Admin\CoordinadorController')->names('admin.coordinadores')->parameters(['coordinadores' => 'id']);
+
   /* Asesores */
   Route::resource('asesores', 'Admin\AsesorController')->names('admin.asesores')->parameters(['asesores' => 'asesor']);
 

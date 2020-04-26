@@ -29,9 +29,9 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card card-light shadow">
+                <div class="card shadow">
 
-                    <div class="card-header">
+                    <div class="card-header py-3">
                         <h1 class="card-title text-secondary">CREAR NUEVA ASESORÍA</h1>
                     </div>
 
